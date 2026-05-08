@@ -1,4 +1,4 @@
-# X API / Twitter Scraper Skill for AI Coding Agents
+# X (Twitter) Scraper API Skill: Search Tweets, Get Profile Tweets, Followers, Posting & Replies
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg?url=https%3A%2F%2Fgithub.com%2FXquik-dev%2Fx-twitter-scraper)](https://deepwiki.com/Xquik-dev/x-twitter-scraper)
 <a href="https://nothumansearch.ai/site/xquik.com" target="_blank" rel="noopener"><img src="https://nothumansearch.ai/badge/xquik.com.svg" alt="NHS Agentic Readiness Score" height="28"></a>
@@ -12,7 +12,11 @@
 [![smithery badge](https://smithery.ai/badge/xquik/x-twitter-scraper)](https://smithery.ai/servers/xquik/x-twitter-scraper)
 [![MseeP.ai Security Assessment Badge](https://mseep.net/pr/xquik-dev-x-twitter-scraper-badge.png)](https://mseep.ai/app/xquik-dev-x-twitter-scraper)
 
-An [AI agent skill](https://skills.sh) that gives coding agents deep knowledge of the [Xquik](https://xquik.com) X (Twitter) real-time data platform. 100+ REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and confirmation-gated write actions.
+An [AI agent skill](https://skills.sh) for [Xquik](https://xquik.com), a Twitter API alternative for developers who need to search tweets, get tweets from profiles, export followers, download media, monitor accounts, and automate posting workflows.
+
+Use it for advanced Twitter search, tweet search API calls, profile tweet scraping, follower export to CSV, media download, tweet scheduling, send tweets, post replies, like, repost, follow, DM, webhooks, MCP, and official SDK workflows from AI coding agents.
+
+Includes 100+ REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and confirmation-gated write actions.
 
 **The cheapest X data API on the market** - post reads from $0.00015/call (about 33x cheaper than official X API post reads).
 
