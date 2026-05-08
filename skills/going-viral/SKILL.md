@@ -3,6 +3,7 @@ name: going-viral
 description: "Use when the user wants to maximize a tweet's chances of going viral on X (Twitter). Combines idea generation, style matching, algorithm scoring, and viral-reference mining into one end-to-end workflow. Advisory; user always confirms the final post."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

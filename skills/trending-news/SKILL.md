@@ -3,6 +3,7 @@ name: trending-news
 description: "Use when the user wants trending news with X (Twitter) context. Pulls breaking news from 7 curated sources, links each story to related tweets, and surfaces what people on X are saying about each headline. Free read-only news radar."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

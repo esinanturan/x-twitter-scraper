@@ -3,6 +3,7 @@ name: user-tweets
 description: "Use when the user wants to fetch tweets from a specific X (Twitter) user - their recent posts, their liked tweets, or their media tweets (photos and videos they posted). Covers lookup by @username, paginated timeline reads, and bulk extraction of a user's full post history. For account writes or DMs, use the sibling skills."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

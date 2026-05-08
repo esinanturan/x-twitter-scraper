@@ -3,6 +3,7 @@ name: find-viral-tweets
 description: "Use when the user wants to find viral or high-engagement tweets on X (Twitter) around a topic, from a specific author, or across a hashtag. Filters by minimum likes, retweets, or views. Read-only discovery tool."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

@@ -3,6 +3,7 @@ name: tweet-style
 description: "Use when the user wants to analyze the writing style, voice, or tone of an X (Twitter) account. Extracts stylistic patterns, top topics, format preferences, and engagement profile for a handle. Read-only style analysis."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

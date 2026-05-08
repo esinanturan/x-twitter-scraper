@@ -3,6 +3,7 @@ name: x-lists
 description: "Use when the user wants to read X (Twitter) Lists. Extracts list members, list followers, and the post feed of a list. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

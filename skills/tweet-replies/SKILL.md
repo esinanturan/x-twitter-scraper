@@ -3,6 +3,7 @@ name: tweet-replies
 description: "Use when the user wants to read replies to a specific tweet on X (Twitter). Fetches the reply thread, reply authors, engagement on each reply, and filters for top replies. Read-only; for posting replies see post-tweets."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

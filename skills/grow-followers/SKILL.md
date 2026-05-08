@@ -3,6 +3,7 @@ name: grow-followers
 description: "Use when the user wants a plan to grow their X (Twitter) followers. Analyzes their recent tweets, identifies what worked, suggests content patterns, and recommends posting cadence based on style analysis. Advisory; does not post or follow anyone autonomously."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

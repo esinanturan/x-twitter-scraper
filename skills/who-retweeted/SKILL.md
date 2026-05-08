@@ -3,6 +3,7 @@ name: who-retweeted
 description: "Use when the user wants to see who retweeted a specific tweet on X (Twitter). Extracts the list of retweeters with follower counts and verified status. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

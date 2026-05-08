@@ -3,6 +3,7 @@ name: search-tweets
 description: "Use when the user wants to search tweets on X (Twitter) by keyword, phrase, hashtag, from a specific user, within a date range, or with engagement filters. Covers both the live search endpoint (latest matches) and bulk tweet search extractions (up to 1,000 tweets per job). Returns tweet IDs, text, authors, metrics, and timestamps."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

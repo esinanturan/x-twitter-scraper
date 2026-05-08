@@ -3,6 +3,7 @@ name: post-tweets
 description: "Use when the user wants to post a tweet, reply to a tweet, quote tweet, or publish a note tweet (long-form, up to 25,000 characters) on X (Twitter). Handles tweet text, media attachments, reply targeting, community posting, and note tweets. Covers posting actions only - for search, analytics, or monitoring see the related skills."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

@@ -3,6 +3,7 @@ name: who-liked
 description: "Use when the user wants to see who liked a specific tweet on X (Twitter). Extracts the list of users who liked the tweet. Read-only, supports bulk extraction for large like counts."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

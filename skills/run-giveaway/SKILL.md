@@ -3,6 +3,7 @@ name: run-giveaway
 description: "Use when the user wants to run a giveaway on X (Twitter). Pulls entrants from likes, retweets, replies, or quote tweets of a seed tweet, applies follower and account-age filters, picks verifiable winners, and exports the entrant list. End-to-end draw workflow."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

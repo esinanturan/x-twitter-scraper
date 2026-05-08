@@ -3,6 +3,7 @@ name: track-mentions
 description: "Use when the user wants to track mentions of a handle, brand, or keyword on X (Twitter). Fetches recent mentions, sets up monitors for real-time alerts only after explicit approval, and pulls mention history. Covers both one-off reads and continuous monitoring."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

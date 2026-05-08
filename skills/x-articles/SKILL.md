@@ -3,6 +3,7 @@ name: x-articles
 description: "Use when the user wants to read X Articles (long-form posts on X/Twitter). Fetches article content, author, published date, and metadata. Handles both individual article lookups and bulk extraction across an author or query."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

@@ -3,6 +3,7 @@ name: for-you-feed
 description: "Use when the user wants to read the For You home timeline on X (Twitter) through the API after explicit approval. Surfaces the algorithmic home timeline (cursor-paginated) with an option to suppress already-seen tweets. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

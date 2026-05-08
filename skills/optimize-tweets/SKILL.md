@@ -3,6 +3,7 @@ name: optimize-tweets
 description: "Use when the user wants to optimize a tweet for the X (Twitter) algorithm before posting. Scores drafts against engagement predictors, suggests rewrites, and compares variants. Text scoring only - no posting."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

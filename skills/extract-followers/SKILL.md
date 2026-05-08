@@ -3,6 +3,7 @@ name: extract-followers
 description: "Use when the user wants to extract the follower list of any public X (Twitter) account. Pulls follower profiles, filters by verified status, and exports to CSV or JSONL for analysis. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

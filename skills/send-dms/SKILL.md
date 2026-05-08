@@ -3,6 +3,7 @@ name: send-dms
 description: "Use when the user wants to send a direct message on X (Twitter) or read DM history with a recipient after explicit approval. Covers one-to-one DM sends only; no bulk blasting."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

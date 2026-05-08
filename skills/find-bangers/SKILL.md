@@ -3,6 +3,7 @@ name: find-bangers
 description: "Use when the user asks for 'bangers' on X (Twitter) - breakout tweets with exceptional engagement relative to the author's usual performance. Surfaces anomalously high-performing tweets for inspiration or trend-spotting. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

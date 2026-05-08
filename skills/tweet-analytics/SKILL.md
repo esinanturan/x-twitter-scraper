@@ -3,6 +3,7 @@ name: tweet-analytics
 description: "Use when the user wants to check a tweet's engagement metrics - likes, retweets, quotes, replies, bookmarks, impressions, views - or compare engagement across multiple tweets. Fetches per-tweet metrics, lists of users who liked or retweeted, and breakdowns of how a tweet performed. For posting new tweets or searching, use the sibling skills."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

@@ -3,6 +3,7 @@ name: x-bookmarks
 description: "Use when the user wants to read their X (Twitter) bookmarks after explicit approval - tweets they have privately saved. Lists, searches, and exports bookmarks from a connected account. Read-only; requires an account connection."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

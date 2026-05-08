@@ -3,6 +3,7 @@ name: track-competitors
 description: "Use when the user wants to track competitor accounts on X (Twitter). Measures their growth, benchmarks engagement, surfaces their best-performing tweets, and creates ongoing monitors only after explicit approval."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

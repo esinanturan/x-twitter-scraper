@@ -3,6 +3,7 @@ name: x-trends
 description: "Use when the user wants to know what is trending on X (Twitter) right now. Fetches current trending topics, hashtags, and volumes by country. Useful for content ideation, timely posts, news monitoring, and spotting viral moments."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

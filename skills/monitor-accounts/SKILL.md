@@ -3,6 +3,7 @@ name: monitor-accounts
 description: "Use when the user wants to monitor one or more X (Twitter) accounts for new tweets, replies, or profile changes. Creates ongoing monitors only after explicit approval, polls events, and can deliver webhooks on match. Continuous monitoring workflow."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

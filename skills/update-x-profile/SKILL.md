@@ -3,6 +3,7 @@ name: update-x-profile
 description: "Use when the user wants to update their X (Twitter) profile: bio, display name, location, website URL, avatar, or banner image. Each field update requires explicit user approval."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

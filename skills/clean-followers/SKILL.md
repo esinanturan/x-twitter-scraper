@@ -3,6 +3,7 @@ name: clean-followers
 description: "Use when the user wants to audit their X (Twitter) followers for bots, inactive accounts, or ghosts. Analysis-only; removal is not exposed via the API and must be done in the dashboard or X app."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

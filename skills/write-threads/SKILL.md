@@ -3,6 +3,7 @@ name: write-threads
 description: "Use when the user wants to write a Twitter thread on X. Drafts a multi-tweet thread with coherent narrative, splits long content into 280-char segments, and hands off to post-tweets for publishing. Text generation only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

@@ -3,6 +3,7 @@ name: x-communities
 description: "Use when the user wants to read X (Twitter) Communities - the group-focused feature. Pulls community member lists, posts within a community, and searches across communities. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

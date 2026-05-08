@@ -3,6 +3,7 @@ name: x-spaces
 description: "Use when the user wants to read X (Twitter) Spaces data - the audio room feature. Extracts Space participants, hosts, speakers, and listeners. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

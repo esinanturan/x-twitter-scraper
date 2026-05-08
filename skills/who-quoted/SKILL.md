@@ -3,6 +3,7 @@ name: who-quoted
 description: "Use when the user wants to see who quote-tweeted (QT'd) a specific tweet on X (Twitter). Pulls the quote tweets and their authors with engagement numbers. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

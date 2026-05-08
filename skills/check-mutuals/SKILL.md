@@ -3,6 +3,7 @@ name: check-mutuals
 description: "Use when the user wants to check mutual follows on X (Twitter) - which accounts follow each other, or which of account A's followers also follow account B. Useful for relationship mapping and social graph analysis. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

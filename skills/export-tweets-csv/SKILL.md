@@ -3,6 +3,7 @@ name: export-tweets-csv
 description: "Use when the user wants to export X (Twitter) data to CSV, JSONL, or XLSX. Covers exporting extraction results (tweets, followers, mentions, giveaway entrants) and formatting them for spreadsheets or pipelines. Download handling only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

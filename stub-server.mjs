@@ -8,7 +8,7 @@ import { createInterface } from "node:readline";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.4.10",
+  version: "2.4.11",
 };
 
 const CAPABILITIES = {

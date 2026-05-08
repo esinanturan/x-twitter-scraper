@@ -3,6 +3,7 @@ name: write-tweets
 description: "Use when the user wants help composing a tweet on X (Twitter). Generates tweet ideas, drafts, algorithm-optimized variants, and scores tweets for engagement. Output only - user or post-tweets skill handles publishing."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

@@ -3,6 +3,7 @@ name: find-influencers
 description: "Use when the user wants to find X (Twitter) influencers in a niche. Searches users by bio keyword, filters by follower count and engagement, and surfaces active accounts suited for outreach or partnership research. Read-only discovery."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

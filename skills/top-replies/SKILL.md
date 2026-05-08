@@ -3,6 +3,7 @@ name: top-replies
 description: "Use when the user wants the best replies under a tweet on X (Twitter), ranked by likes and engagement. Pulls the top reply thread for any public tweet. Read-only."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

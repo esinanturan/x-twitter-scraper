@@ -3,6 +3,7 @@ name: tweet-webhooks
 description: "Use when the user wants to receive real-time X (Twitter) events at their own URL. Creates HMAC-signed webhooks that fire on new tweets, mentions, monitored account activity, or giveaway completion. Delivery setup only - payload handling is the user's webhook."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

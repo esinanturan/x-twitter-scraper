@@ -3,6 +3,7 @@ name: tweet-ideas
 description: "Use when the user wants tweet ideas or content prompts for X (Twitter). Generates a batch of post ideas based on the user's niche, recent trends, and their style profile. Ideation only - drafting and posting are separate skills."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

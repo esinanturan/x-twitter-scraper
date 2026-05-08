@@ -3,6 +3,7 @@ name: follow-unfollow
 description: "Use when the user wants to follow or unfollow accounts on X (Twitter), or check whether one account follows another. Single-target only; bulk follow operations require explicit per-account confirmation."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:

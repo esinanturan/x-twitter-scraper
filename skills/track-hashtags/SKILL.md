@@ -3,6 +3,7 @@ name: track-hashtags
 description: "Use when the user wants to track a hashtag on X (Twitter). Pulls recent tweets using the hashtag, the top posts, the unique authors, and can set up continuous monitoring only after explicit approval. Covers one-shot reads and ongoing hashtag monitors."
 license: MIT
 metadata:
+  internal: true
   author: Xquik
   version: "1.0.0"
   openclaw:
