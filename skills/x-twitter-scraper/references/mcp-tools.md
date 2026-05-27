@@ -54,7 +54,7 @@ Apply these gates before using `xquik`:
 | Direct messages | Show sender, recipient, and message text. Never send bulk or automatic DMs. |
 | Persistent resources | Create monitors and webhooks only when the user explicitly asks for ongoing delivery. Show target, event types, URL, and ongoing cost before creation. |
 | Private reads | Confirm before fetching DMs, bookmarks, notifications, or home timeline. Do not forward returned private data to other tools without consent. |
-| Billing or payments | Do not call checkout, top-up, or MPP payment endpoints unless the user explicitly asks and confirms the exact amount. |
+| Account funding | Dashboard-only. The agent may read credit balance, but must not start plan changes or account funding. |
 | X account login | Never ask for or submit X login material. Account connection and re-authentication happen in the dashboard. |
 
 ```typescript
@@ -140,7 +140,7 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 | Using `compose` when user wants to send a tweet | `POST /compose` is for drafting. Use `POST /x/tweets` to send |
 | Using `POST /x/tweets` when user wants help writing | Use the 3-step compose flow instead |
 | Falling back to web search when API call fails | Use free data already fetched (radar, styles, compose). Never discard it |
-| Not checking subscription before paid calls | Attempt the requested call. On 402, explain the billing issue and ask before any checkout or top-up action |
+| Not checking account access before paid calls | Attempt the requested call. On 402, explain the account state and direct the user to the dashboard |
 | Passing API keys in code | Auth is injected automatically. Never include keys |
 | Using `explore` for API calls | `explore` is read-only spec search. Use `xquik` for actual API calls |
 | Looking up follow/DM by username | Follow and DM endpoints need numeric user ID. Look up via `GET /x/users/{id}` first; that route accepts usernames and IDs |

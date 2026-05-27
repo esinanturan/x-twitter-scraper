@@ -179,7 +179,6 @@ Event types: `tweet.new`, `tweet.quote`, `tweet.reply`, `tweet.retweet`, `webhoo
 | **Download tweet media** | `POST /x/media/download` | 1 credit/item |
 | **Extract bulk data** | `POST /extractions` | 1-5 credits/result |
 | **Check credits** | `GET /credits` | Free |
-| **Top up credits** | `POST /credits/topup` | Exact amount confirmation required |
 | **Compose a tweet** | `POST /compose` | Free |
 | **Post a tweet** | `POST /x/tweets` | 10 credits |
 | **Like / Unlike a tweet** | `POST` / `DELETE /x/tweets/{id}/like` | 10 credits |

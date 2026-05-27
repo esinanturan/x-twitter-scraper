@@ -19,7 +19,6 @@ All requests require the `x-api-key` header. All responses are JSON. HTTPS only.
 - [Compose](#compose)
 - [Drafts](#drafts)
 - [Tweet Style Cache](#tweet-style-cache)
-- [Subscribe](#subscribe)
 - [X Accounts (Connected)](#x-accounts-connected)
 - [X Write](#x-write)
 - [Credits](#credits)
@@ -1033,25 +1032,6 @@ Get live engagement metrics for cached tweets for a cached style label or userna
 
 ---
 
-## Subscribe
-
-### Get Subscription Link
-
-```
-POST /subscribe
-```
-
-Returns a checkout URL for subscribing or managing the subscription. If already subscribed, returns the billing portal URL. Use only after the user confirms the plan or billing action.
-
-**Response:**
-```json
-{
-  "url": "<checkout-or-billing-portal-url>"
-}
-```
-
----
-
 ## X Accounts (Connected)
 
 Manage connected X accounts for confirmation-gated write actions. All endpoints are free (no usage cost).
@@ -1308,33 +1288,7 @@ Check a pending write action by the ID returned from an earlier write response.
 GET /credits
 ```
 
-Get credit balance, lifetime purchased/used, and auto top-up status. Free.
-
-### Top Up Credits
-
-```
-POST /credits/topup
-```
-
-Get a checkout URL to purchase credits ($10 minimum). Use only after the user confirms the exact amount.
-
-### Get Top-Up Status
-
-```
-GET /credits/topup/status
-```
-
-Poll a checkout session after starting a credit top-up. Query: `session_id`. Free.
-
-### Quick Top Up
-
-```
-POST /credits/quick-topup
-```
-
-Charge a saved payment method for credits after the user confirms the exact amount. Body: `{ "dollars": 10 }` ($10 minimum, $500 maximum). Free endpoint, but it can initiate a confirmed card charge.
-
-Responses include `{ "outcome": "charged", "credits": "...", "balance": "..." }`, `{ "outcome": "no_payment_method" }`, or `{ "outcome": "requires_action", "clientSecret": "..." }`.
+Get credit balance and lifetime usage fields. Free. Account funding and plan changes are dashboard-only and intentionally omitted from this installable skill.
 
 ---
 

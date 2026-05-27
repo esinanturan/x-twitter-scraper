@@ -10,6 +10,8 @@ Connect AI agents and IDEs to Xquik via the Model Context Protocol. The MCP serv
 
 > **Security:** Use a scoped, revocable API key - not your primary account key. Where your platform supports environment variable interpolation (e.g., `${XQUIK_API_KEY}`), prefer that over hardcoding. Rotate keys periodically from the Xquik dashboard account page. Never commit API keys to version control.
 
+Use native HTTP MCP clients or OAuth connectors only. Do not proxy Xquik API keys through third-party local bridge packages, local proxy commands, or command-line adapters.
+
 ## Claude.ai (Web)
 
 Claude.ai supports MCP connectors natively via OAuth. Add Xquik as a connector from **Settings > Feature Preview > Integrations > Add More > Xquik**. The OAuth 2.1 flow handles authentication automatically. No API key needed.
@@ -155,7 +157,7 @@ The MCP server (v2) at `https://xquik.com/mcp` provides 2 structured API tools:
 | `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |
 | `xquik` | Send confirmed Xquik API requests | Varies by endpoint |
 
-The agent sends structured API requests through the MCP server, which handles authentication and request routing within the same first-party infrastructure as the REST API. All 100+ REST API endpoints across 10 categories are accessible. Private reads, writes, persistent resources, and billing flows require explicit user confirmation before use.
+The agent sends structured API requests through the MCP server, which handles authentication and request routing within the same first-party infrastructure as the REST API. All 100+ REST API endpoints across 10 categories are accessible. Private reads, writes, and persistent resources require explicit user confirmation before use. Account funding and plan changes are dashboard-only.
 
 ## After Setup
 
@@ -167,7 +169,6 @@ The agent sends structured API requests through the MCP server, which handles au
 | Run a giveaway | Confirm tweet URL and rules -> `POST /draws` |
 | Bulk extraction | `POST /extractions/estimate` -> `POST /extractions` -> `GET /extractions/{id}` |
 | Compose optimized tweet | `POST /compose` (step=compose -> refine -> score) |
-| Billing checkout | Confirm plan or amount -> `POST /subscribe` or `POST /credits/topup` |
 
 ### Example Prompts
 
@@ -184,4 +185,4 @@ Try these with your AI agent:
 - "What's trending on Hacker News today?"
 - "Help me write a tweet about launching my product"
 - "Set up a webhook at https://my-server.com/events for new tweets after I confirm the destination"
-- "What plan am I on and how much have I used?"
+- "What is my current credit balance?"

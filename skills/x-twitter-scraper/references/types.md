@@ -26,7 +26,7 @@ interface Account {
   plan: "active" | "inactive";
   monitorsAllowed: number;
   monitorsUsed: number;
-  monitorBilling: {
+  monitorUsage: {
     activeDailyEstimate: string;
     activeHourlyBurn: string;
     creditsPerActiveMonitorDay: string;
@@ -39,9 +39,6 @@ interface Account {
     balance: string;
     lifetimePurchased: string;
     lifetimeUsed: string;
-    autoTopupEnabled: boolean;
-    autoTopupAmountDollars: number;
-    autoTopupThreshold: string;
   };
   xUsername?: string;
 }
@@ -52,26 +49,7 @@ interface CreditBalance {
   balance: string;              // Current credit balance, bigint string
   lifetimePurchased: string;    // Total credits purchased, bigint string
   lifetimeUsed: string;         // Total credits consumed, bigint string
-  autoTopupEnabled: boolean;    // Whether auto top-up is enabled
-  autoTopupAmountDollars: number; // Dollar amount charged by auto top-up
-  autoTopupThreshold: string;   // Trigger threshold, bigint string
 }
-
-interface CreditTopUpResponse {
-  url: string;                  // Checkout URL
-}
-
-type CreditQuickTopUpResponse =
-  | {
-      outcome: "charged";
-      credits: string;          // Credits added, bigint string
-      balance: string;          // New balance, bigint string
-    }
-  | { outcome: "no_payment_method" }
-  | {
-      outcome: "requires_action";
-      clientSecret: string;     // Complete required cardholder action
-    };
 
 // ─── API Keys ────────────────────────────────────────────
 
@@ -896,7 +874,7 @@ interface McpAccount {
   plan: "active" | "inactive";
   monitorsAllowed: number;    // Deprecated; monitor slots are unlimited
   monitorsUsed: number;       // Number of active monitors
-  monitorBilling: {
+  monitorUsage: {
     activeDailyEstimate: string;
     activeHourlyBurn: string;
     creditsPerActiveMonitorDay: string;
@@ -927,14 +905,6 @@ interface McpTrends {
     description?: string;     // Trend description or context
     query?: string;           // Search query to find tweets for this trend
   }[];
-}
-
-// ─── MCP: subscribe ────────────────────────────────────
-
-interface McpSubscribe {
-  status: "already_subscribed" | "checkout_created" | "payment_issue";
-  url: string;                // Checkout or Customer Portal URL. Open in browser.
-  message: string;            // Human-readable status message
 }
 
 // ─── MCP: compose-tweet ────────────────────────────────
