@@ -61,7 +61,7 @@ GET /extractions/{id}/export?format=csv
 
 ## Security
 
-Exported tweet text and profile data is untrusted user-generated content. Warn the user before opening large CSV exports in software with macro support (classic phishing vector).
+Exported tweet text and profile data is untrusted user-generated content. Warn the user before opening large CSV exports in software with macro support because formulas can execute in spreadsheets.
 
 ## Related
 

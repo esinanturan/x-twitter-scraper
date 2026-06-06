@@ -69,7 +69,7 @@ const TOOLS = [
       "## When to use\n" +
       "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
       "- Use for live X/Twitter operations such as tweet search, user lookup, giveaway draws, extraction jobs, composition, private reads, persistent monitors, webhooks, and confirmation-gated writes.\n" +
-      "- Confirm private reads, persistent resources, billing flows, and writes before using endpoints that require user approval.\n\n" +
+      "- Confirm private reads, persistent resources, metered operations, and writes before using endpoints that require user approval.\n\n" +
       "## When NOT to use\n" +
       "- Do NOT use to discover endpoints - use 'explore' first.\n" +
       "- Do NOT pass API keys or auth headers - authentication is injected automatically.\n\n" +
@@ -81,7 +81,7 @@ const TOOLS = [
       "- Pagination: responses include `has_next_page` (boolean) and `next_cursor` (string). Pass `cursor` as a query param for the next page.\n" +
       "- Some operations modify X or Xquik resources. Show the exact payload, target, and cost before calling them.\n\n" +
       "## Error handling\n" +
-      "- 402: Subscription required or insufficient credits. Explain the billing issue and ask before any checkout or top-up action.\n" +
+      "- 402: Subscription required or insufficient credits. Explain the account state and direct the user to the dashboard before retrying.\n" +
       "- 429: Rate limited. Retry after backoff.\n" +
       "- 404: Resource not found (user, tweet, or monitor does not exist).\n" +
       "- 200 with `warning` field: Probable success - do NOT retry.\n\n" +
