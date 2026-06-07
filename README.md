@@ -18,46 +18,44 @@ Use it for advanced Twitter search, tweet search API calls, profile tweet scrapi
 
 Includes 100+ REST API endpoints, 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, and confirmation-gated write actions.
 
-**The cheapest X data API on the market** - post reads from $0.00015/call (about 33x cheaper than official X API post reads).
-
 Works with **40+ AI coding agents** including Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code, Cline, Roo Code, Goose, Amp, Augment, Continue, OpenHands, Trae, OpenCode, and more.
 
 ## Usage Costs
 
-Xquik is dramatically cheaper than every alternative for X/Twitter data access. This installable skill can read credit balance and estimate usage costs. Users manage plan and credit changes in the Xquik dashboard.
+This installable skill can read credit balance and estimate usage costs. Users manage plan and credit changes in the Xquik dashboard.
 
 ### vs Official X API
 
-| | Xquik | Official X pay-per-usage | Notes |
+| | Xquik | Official X API | Notes |
 |---|---|---|---|
 | **Access model** | **Dashboard-managed account + usage credits** | Usage-based account | This skill reads balance and estimates cost only |
-| **Cost per post read** | **$0.00015** | $0.005 per resource | Xquik is about 33x cheaper |
-| **Cost per user lookup** | **$0.00015** | $0.010 per resource | Xquik is about 67x cheaper |
-| **Cost per trend read** | **$0.00045** | $0.010 per resource | Xquik is about 22x cheaper |
-| **Write actions** | **$0.0015** | $0.015 content or interaction create; $0.200 content create with URL | Xquik is 10x cheaper for matching $0.015 write classes |
-| **Bulk extraction** | **From $0.00015/result** | Charged per returned resource | Built-in extraction jobs are included with Xquik |
+| **Post reads** | Metered in usage credits | Pay-per-usage resource pricing | Estimate before running |
+| **User lookup** | Metered in usage credits | Pay-per-usage resource pricing | Estimate before running |
+| **Trend reads** | Metered in usage credits | Pay-per-usage resource pricing | Estimate before running |
+| **Write actions** | Metered in usage credits | Pay-per-usage write pricing | Confirmation required |
+| **Bulk extraction** | Metered per result in usage credits | Charged per returned resource | Built-in extraction jobs are included with Xquik |
 | **Monitoring + webhooks** | Active monitors are metered; webhooks included | No direct monitor product in pricing table | Real-time delivery is included |
-| **Giveaway draws** | **$0.00015/entry** | No comparable draw product | Draw engine is included |
+| **Giveaway draws** | Metered per entry in usage credits | No comparable draw product | Draw engine is included |
 | **MCP server** | **Included** | Not listed | Agent tools are included |
 
-Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricing), which lists current pay-per-usage read and write rates.
+Source: [official X API pricing](https://docs.x.com/x-api/getting-started/pricing), which lists current pay-per-usage rates.
 
-### Per-Operation Costs (1 credit = $0.00015)
+### Per-Operation Usage Credits
 
-| Operation | Credits | Cost |
-|-----------|---------|------|
-| Read (tweet, search, timeline, bookmarks, etc.) | 1 | $0.00015 |
-| Read (user profile, verified followers, followers you know) | 1 | $0.00015 |
-| Read (favoriters) | 1 | $0.00015 |
-| Read (trends) | 3 | $0.00045 |
-| Follow check, article | 5 | $0.00075 |
-| Write (tweet, like, retweet, follow, DM, etc.) | 10 | $0.0015 |
-| Extraction (tweets, replies, quotes, mentions, posts, likes, media, search, favoriters, retweeters, community members, people search, list members, list followers) | 1/result | $0.00015/result |
-| Extraction (followers, following, verified followers) | 1/result | $0.00015/result |
-| Extraction (articles) | 5/result | $0.00075/result |
-| Draw | 1/entry | $0.00015/entry |
-| Active monitors | 21/hour | $0.00315/hour |
-| Webhooks, radar, compose, drafts | 0 | **Free** |
+| Operation | Credits |
+|-----------|---------|
+| Read (tweet, search, timeline, bookmarks, etc.) | 1 |
+| Read (user profile, verified followers, followers you know) | 1 |
+| Read (favoriters) | 1 |
+| Read (trends) | 3 |
+| Follow check, article | 5 |
+| Write (tweet, like, retweet, follow, DM, etc.) | 10 |
+| Extraction (tweets, replies, quotes, mentions, posts, likes, media, search, favoriters, retweeters, community members, people search, list members, list followers) | 1/result |
+| Extraction (followers, following, verified followers) | 1/result |
+| Extraction (articles) | 5/result |
+| Draw | 1/entry |
+| Active monitors | 21/hour |
+| Webhooks, radar, compose, drafts | 0 |
 
 ### Skill Account Boundary
 

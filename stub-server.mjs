@@ -87,8 +87,8 @@ const TOOLS = [
       "- 200 with `warning` field: Probable success - do NOT retry.\n\n" +
       "## Costs\n" +
       "- Free: compose, styles, drafts, radar, account info, support, credit balance, and webhook management.\n" +
-      "- 1 credit/read ($0.00015): tweet search, timeline, bookmarks, favoriters.\n" +
-      "- 10 credits/write ($0.0015): tweet, like, retweet, follow, DM.\n\n" +
+      "- 1 credit/read: tweet search, timeline, bookmarks, favoriters.\n" +
+      "- 10 credits/write: tweet, like, retweet, follow, DM.\n\n" +
       "## Input format\n" +
       "Provide a bounded request function using `xquik.request(path, { method?, body?, query? })`. Auth is automatic.\n\n" +
       "## Examples\n" +
