@@ -114,7 +114,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **X account monitoring**: Track accounts for new tweets, replies, quotes, retweets with explicit approval
 - **Webhook delivery**: Receive HMAC-signed event notifications at your HTTPS endpoint
 - **Trending topics**: Get trending hashtags and topics by region
-- **Radar**: Trending news from 7 sources (Google Trends, Hacker News, Polymarket, TrustMRR, Wikipedia, GitHub, Reddit). Free
+- **Radar**: Trending news from supported trend and news sources. Free
 - **Giveaway draws**: Run transparent draws from tweet replies with configurable filters
 - **Write actions**: Post tweets, like, retweet, follow/unfollow, remove followers, send DMs, update profile, upload media, manage communities after explicit approval
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring (free)
@@ -136,7 +136,7 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 | **Webhooks** | HMAC-SHA256 signature verification in Node.js, Python, Go |
 | **Media Download** | Download images, videos, GIFs with permanent hosted URLs |
 | **Engagement Analytics** | Likes, retweets, replies, quotes, views, bookmarks per tweet |
-| **Trending Topics** | Regional trends + 7 free news sources via Radar |
+| **Trending Topics** | Regional trends plus supported news sources via Radar |
 | **Tweet Composition** | Algorithm-optimized tweet composer with scoring checklist (free) |
 | **Usage Credits** | Check balance and estimate costs; dashboard handles plan and credit changes |
 | **TypeScript Types** | Complete type definitions for all API objects |
@@ -155,7 +155,7 @@ Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, VS Code
 | Events | List (filtered, paginated), get single |
 | Webhooks | Create with destination confirmation, list, update, delete, test, deliveries |
 | Trends | Regional trending topics |
-| Radar | Trending topics & news from 7 sources (free) |
+| Radar | Trending topics & news from supported sources (free) |
 | Draws | Create with filters, list, get with winners, export |
 | Styles | Analyze, save, list, get, delete, compare, performance |
 | Compose | Tweet composition (compose, refine, score) |
