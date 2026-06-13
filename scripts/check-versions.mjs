@@ -158,12 +158,28 @@ const contentChecks = [
   {
     path: ".claude-plugin/plugin.json",
     required: ["100+ endpoints"],
-    forbidden: ["113 endpoints", "112 endpoints", blocked("pay-", "per-use")],
+    forbidden: [
+      "113 endpoints",
+      "112 endpoints",
+      blocked("pay-", "per-use"),
+      blocked("$", "0", "."),
+      "33x",
+      "official X API",
+      "cheaper",
+    ],
   },
   {
     path: ".claude-plugin/marketplace.json",
     required: ["confirmation-gated writes"],
-    forbidden: ["write actions, credits", blocked("pay-", "per-use"), blocked("M", "PP")],
+    forbidden: [
+      "write actions, credits",
+      blocked("pay-", "per-use"),
+      blocked("M", "PP"),
+      blocked("$", "0", "."),
+      "33x",
+      "official X API",
+      "cheaper",
+    ],
   },
   {
     path: "skills/x-twitter-scraper/references/pricing.md",
