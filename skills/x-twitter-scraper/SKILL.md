@@ -1,11 +1,13 @@
 ---
 name: x-twitter-scraper
 description: "Use when the user needs X (Twitter) data through Xquik: tweet search, user lookup, follower export, media download, monitoring, webhooks, MCP, SDK setup, or confirmation-gated publishing workflows. Read-only by default, API-key only, no X login material, and every write, private read, monitor, webhook, or metered bulk job requires explicit approval."
+allowed-tools: WebFetch
+version: "2.4.16"
+author: Xquik
 compatibility: Requires internet access to call the first-party Xquik REST API.
 license: MIT
+tags: [twitter, x, social-media, api-development, scraping]
 metadata:
-  author: Xquik
-  version: "2.4.16"
   openclaw:
     requires:
       env:
