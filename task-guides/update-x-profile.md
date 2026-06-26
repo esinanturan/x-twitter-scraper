@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -17,7 +17,9 @@ metadata:
     contentTrust: trusted
     contentIsolation: enforced
     promptInjectionDefense: true
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     writeConfirmation: required
     executionModel: api-only
     codeExecution: none
@@ -30,7 +32,7 @@ Change bio, display name, location, website, avatar, or banner on a connected X 
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | PATCH /x/profile | Update bio, name, location, website | Write tier |
 | PATCH /x/profile/avatar | Upload a new avatar | Write tier |
@@ -70,4 +72,4 @@ Image URLs for avatar/banner must be HTTPS. Validate format (JPG/PNG) and reason
 
 ## Related
 
-Full API surface: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Full API surface: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

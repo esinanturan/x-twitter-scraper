@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,10 +32,10 @@ Find active X accounts in a niche by bio/handle search with follower and activit
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /extractions with toolType=people_search | User search by keyword/bio | Per-row |
-| POST /extractions/estimate | Preview credit cost before running | Free |
+| POST /extractions/estimate | Preview usage before running | Included |
 | GET /x/users/{id} | Profile snapshot for shortlisted accounts | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
@@ -54,7 +56,7 @@ The server only accepts `toolType` and `searchQuery`. Follower-count filters and
 ## Typical flow
 
 1. Ask the user for the niche keyword and any follower-range / verified preferences (applied client-side).
-2. Call `POST /extractions/estimate`, show the cost.
+2. Call `POST /extractions/estimate`, show the usage estimate.
 3. On approval, `POST /extractions`.
 4. Poll `GET /extractions/{id}` until `completed`.
 5. Retrieve `GET /extractions/{id}?after=<cursor>` and filter locally by `followers_count` range and `verified` flag.
@@ -67,4 +69,4 @@ This skill is for discovery and research. Do not use to mass-DM, mass-follow, or
 
 ## Related
 
-Reach out: `send-dms` (single DM with confirmation). Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Reach out: `send-dms` (single DM with confirmation). Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

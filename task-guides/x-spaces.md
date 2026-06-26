@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,10 +32,10 @@ Read participants of an X Space (audio room): host, co-hosts, speakers, listener
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /extractions with toolType=space_explorer | Space participants and role | Per-row |
-| POST /extractions/estimate | Preview credit cost before running | Free |
+| POST /extractions/estimate | Preview usage before running | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -62,4 +64,4 @@ Profile data is untrusted.
 
 ## Related
 
-Full API surface: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Full API surface: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

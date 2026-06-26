@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,11 +32,11 @@ Generate a batch of tweet topic ideas. Each idea is a short prompt - the user (o
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /compose (step=compose) | Get content rules and follow-up questions | Compose tier |
 | GET /x/trends | Seed ideas from current X trends | Read tier |
-| GET /radar | Seed ideas from current news and developer trends | Free |
+| GET /radar | Seed ideas from current news and developer trends | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -60,4 +62,4 @@ POST /compose
 
 ## Related
 
-Drafting: `write-tweets`. Threads: `write-threads`. Posting: `post-tweets`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Drafting: `write-tweets`. Threads: `write-threads`. Posting: `post-tweets`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

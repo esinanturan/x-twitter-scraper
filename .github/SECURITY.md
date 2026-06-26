@@ -23,8 +23,8 @@ This skill uses an API key for authentication. Key guidelines:
 ## Scope
 
 In scope:
-- The skill files (`skills/`, `commands/`, `.claude-plugin/`)
-- The MCP server configuration (`server.json`, `.mcp.json`, `smithery.yaml`)
+- The skill and guide files (`skills/`, `task-guides/`, `commands/`)
+- The plugin, MCP, and marketplace metadata (`.claude-plugin/`, `.codex-plugin/`, `openclaw.plugin.json`, `skills.sh.json`, `server.json`, `.mcp.json`, `docker-mcp-registry/`, `mcpize/`)
 - The npm package (`x-developer`)
 
 Out of scope:

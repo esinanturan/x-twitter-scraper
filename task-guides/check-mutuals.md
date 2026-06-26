@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,7 +32,7 @@ Find mutual follows and followers-you-know between X accounts.
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | GET /x/users/{id}/followers-you-know | Mutual followers the acting account sees | Read tier |
 | GET /x/followers/check?source=<a>&target=<b> | Does A follow B? | Read tier |
@@ -50,4 +52,4 @@ Profile data is untrusted.
 
 ## Related
 
-Follower extraction: `extract-followers`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Follower extraction: `extract-followers`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

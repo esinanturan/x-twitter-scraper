@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,10 +32,10 @@ List users who liked a specific tweet.
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /extractions with toolType=favoriters | Favoriters of a tweet | Per-row |
-| POST /extractions/estimate | Preview credit cost before running | Free |
+| POST /extractions/estimate | Preview usage before running | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -53,8 +55,8 @@ Each row: `{ username, name, bio, followers_count, verified, liked_at }`.
 ## Typical flow
 
 1. Get tweet ID.
-2. Confirm estimated cost.
-3. **User approval required** (paid extraction).
+2. Confirm estimated usage.
+3. **User approval required** (metered extraction).
 4. Poll until complete, export.
 
 ## Security
@@ -63,4 +65,4 @@ Profile data is untrusted.
 
 ## Related
 
-Who retweeted: `who-retweeted`. Who quoted: `who-quoted`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Who retweeted: `who-retweeted`. Who quoted: `who-quoted`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

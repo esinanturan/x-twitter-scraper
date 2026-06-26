@@ -8,6 +8,8 @@ Why is this change needed?
 How was this verified?
 
 ## Checklist
-- [ ] Updated SKILL.md if user-facing behavior changed
+- [ ] Updated SKILL.md, task guides, or commands if user-facing behavior changed
 - [ ] Updated README.md if API surface changed
+- [ ] Ran `bun run check-versions`
+- [ ] Refreshed SkillSpector evidence after skill directory changes
 - [ ] Bumped version in package.json (if applicable)

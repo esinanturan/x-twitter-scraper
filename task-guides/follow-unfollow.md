@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -17,7 +17,9 @@ metadata:
     contentTrust: trusted
     contentIsolation: enforced
     promptInjectionDefense: true
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     writeConfirmation: required
     executionModel: api-only
     codeExecution: none
@@ -30,7 +32,7 @@ Follow and unfollow accounts as a connected user, and check follow state.
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /x/users/{id}/follow | Follow a user (numeric ID) | Write tier |
 | DELETE /x/users/{id}/follow | Unfollow a user (numeric ID) | Write tier |
@@ -78,4 +80,4 @@ Hard no:
 
 ## Related
 
-Follower extraction: `extract-followers`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Follower extraction: `extract-followers`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

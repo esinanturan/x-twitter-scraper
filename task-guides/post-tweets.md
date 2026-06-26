@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,7 +32,7 @@ Post tweets, replies, and quote tweets through a connected X account. The agent 
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /x/tweets | Post a tweet, reply, or quote tweet | Write tier |
 | DELETE /x/tweets/{id} | Delete a tweet | Delete tier |
@@ -103,4 +105,4 @@ This skill assumes an account is already connected. New connections are performe
 
 ## Related
 
-For the full 100+ endpoint reference including reads, analytics, extraction, and monitoring, see [x-twitter-scraper](../x-twitter-scraper/SKILL.md) in the same repo.
+For the full 100+ endpoint reference including reads, analytics, extraction, and monitoring, see [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md) in the same repo.

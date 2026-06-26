@@ -1,4 +1,4 @@
-# X Twitter Scraper API For Tweets, Followers & MCP
+# X Twitter Scraper API For Tweets, Followers, MCP
 
 <table>
   <tr>
@@ -245,13 +245,17 @@ x-twitter-scraper/
 │   └── x-twitter-scraper/
 │       ├── SKILL.md                      # Main skill (auth, usage guardrails, endpoints, patterns)
 │       ├── metadata.json                 # Version and references
+│       ├── skill-card.md                 # Trust and release review card
+│       ├── skillspector-report.md        # Latest static SkillSpector evidence
 │       └── references/
-│           ├── api-endpoints.md          # REST API endpoint reference
+│           ├── api-endpoints.md          # REST API routing index
+│           ├── api-endpoints-*.md        # Split endpoint sections for targeted agent loading
 │           ├── mcp-tools.md              # MCP tool selection rules and workflow patterns
 │           ├── mcp-setup.md              # MCP configs for 10 platforms (v2 + v1)
 │           ├── webhooks.md               # Webhook setup & verification
 │           ├── extractions.md            # 23 extraction tool types
-│           ├── types.md                  # TypeScript type definitions
+│           ├── types.md                  # TypeScript type routing index
+│           ├── types-*.md                # Split schema sections for targeted agent loading
 │           └── python-examples.md        # Python code examples
 ├── task-guides/                          # Public task guides, not installable skills
 ├── server.json                           # MCP Registry metadata

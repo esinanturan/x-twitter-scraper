@@ -16,45 +16,63 @@ const CAPABILITIES = {
 };
 
 const MAX_LINE_LENGTH = 64 * 1024;
+const JSONRPC = "2.0";
+const LIVE_SERVER_MESSAGE =
+  'This is a verification stub. Connect to the live server at https://xquik.com/mcp for real API access. Configure with: { "mcpServers": { "xquik": { "url": "https://xquik.com/mcp", "headers": { "x-api-key": "<YOUR_API_KEY>" } } } }';
+
+function description(lines) {
+  return lines.join("\n");
+}
+
+function codeInputSchema(descriptionText) {
+  return {
+    type: "object",
+    properties: {
+      code: {
+        type: "string",
+        maxLength: 4096,
+        description: descriptionText,
+      },
+    },
+    required: ["code"],
+  };
+}
 
 const TOOLS = [
   {
     name: "explore",
-    description:
-      "Search and browse the Xquik X (Twitter) API specification to discover endpoints before making live API calls with the 'xquik' tool.\n\n" +
-      "## When to use\n" +
-      "- Use 'explore' FIRST to find the right endpoint path, parameters, and response shape before calling 'xquik'.\n" +
-      "- Use when the user asks what capabilities are available or how to accomplish a task on X/Twitter.\n" +
-      "- Use to check whether an endpoint is free or requires a subscription.\n\n" +
-      "## When NOT to use\n" +
-      "- Do NOT use 'explore' to fetch live data from X - use 'xquik' instead.\n" +
-      "- Do NOT use if you already know the endpoint path and parameters.\n\n" +
-      "## Behavior\n" +
-      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 100+ endpoints.\n" +
-      "- Always free, no authentication or credits required.\n" +
-      "- Returns the result of your filter function (e.g., empty array if no endpoints match).\n" +
-      "- Returns a validation error if the request function is invalid.\n" +
-      "- Timeout: 60 seconds.\n" +
-      "- Each EndpointInfo contains: method, path, summary, category (account | composition | credits | extraction | media | monitoring | support | twitter | x-accounts | x-write), free (boolean), parameters (array), and responseShape (string).\n\n" +
-      "## Input format\n" +
-      "Provide a bounded request function. The server exposes `spec.endpoints` (EndpointInfo[]). Filter, search, or return them.\n\n" +
-      "## Examples\n" +
-      "Find all free endpoints: `async () => spec.endpoints.filter(e => e.free)`\n" +
-      "Find by category: `async () => spec.endpoints.filter(e => e.category === 'composition')`\n" +
-      "Search by keyword: `async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'))`\n" +
+    description: description([
+      "Search and browse the Xquik X (Twitter) API specification to discover endpoints before making live API calls with the 'xquik' tool.",
+      "",
+      "## When to use",
+      "- Use 'explore' FIRST to find the right endpoint path, parameters, and response shape before calling 'xquik'.",
+      "- Use when the user asks what capabilities are available or how to accomplish a task on X/Twitter.",
+      "- Use to check whether an endpoint is included usage or requires account access.",
+      "",
+      "## When NOT to use",
+      "- Do NOT use 'explore' to fetch live data from X - use 'xquik' instead.",
+      "- Do NOT use if you already know the endpoint path and parameters.",
+      "",
+      "## Behavior",
+      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 100+ endpoints.",
+      "- Included usage and does not require authentication.",
+      "- Returns the result of your filter function, such as an empty array if no endpoints match.",
+      "- Returns a validation error if the request function is invalid.",
+      "- Timeout: 60 seconds.",
+      "- Each EndpointInfo contains method, path, summary, category, free, parameters, and responseShape fields.",
+      "",
+      "## Input format",
+      "Provide a bounded request function. The server exposes `spec.endpoints` (EndpointInfo[]). Filter, search, or return them.",
+      "",
+      "## Examples",
+      "Find all included-usage endpoints: `async () => spec.endpoints.filter(e => e.free)`",
+      "Find by category: `async () => spec.endpoints.filter(e => e.category === 'composition')`",
+      "Search by keyword: `async () => spec.endpoints.filter(e => e.summary.toLowerCase().includes('tweet'))`",
       "Get full details: `async () => spec.endpoints.find(e => e.path === '/api/v1/x/tweets/search')`",
-    inputSchema: {
-      type: "object",
-      properties: {
-        code: {
-          type: "string",
-          maxLength: 4096,
-          description:
-            "Bounded request function that filters or searches spec.endpoints (EndpointInfo[]). Must return an array or single EndpointInfo object. Example: async () => spec.endpoints.filter(e => e.category === 'twitter')",
-        },
-      },
-      required: ["code"],
-    },
+    ]),
+    inputSchema: codeInputSchema(
+      "Bounded request function that filters or searches spec.endpoints (EndpointInfo[]). Must return an array or single EndpointInfo object. Example: async () => spec.endpoints.filter(e => e.category === 'twitter')",
+    ),
     annotations: {
       destructiveHint: false,
       idempotentHint: true,
@@ -64,49 +82,44 @@ const TOOLS = [
   },
   {
     name: "xquik",
-    description:
-      "Send confirmed Xquik API requests across 100+ REST endpoints.\n\n" +
-      "## When to use\n" +
-      "- Use after calling 'explore' to discover the endpoint path and parameters.\n" +
-      "- Use for live X/Twitter operations such as tweet search, user lookup, giveaway draws, extraction jobs, composition, private reads, persistent monitors, webhooks, and confirmation-gated writes.\n" +
-      "- Confirm private reads, persistent resources, metered operations, and writes before using endpoints that require user approval.\n\n" +
-      "## When NOT to use\n" +
-      "- Do NOT use to discover endpoints - use 'explore' first.\n" +
-      "- Do NOT pass API keys or auth headers - authentication is injected automatically.\n\n" +
-      "## Behavior\n" +
-      "- Processes the provided request function with `xquik.request(path, options?)` and `spec.endpoints` available.\n" +
-      "- No filesystem or arbitrary network access - only xquik.request() is available. Console calls are silently ignored.\n" +
-      "- Timeout: 60 seconds per invocation, 60 seconds per individual API request.\n" +
-      "- Read operations (GET) return JSON objects with the requested data. Mutating operations (POST/PATCH/DELETE) require prior user confirmation and return `{ success: true }` or `{ success: true, warning: '...' }`.\n" +
-      "- Pagination: responses include `has_next_page` (boolean) and `next_cursor` (string). Pass `cursor` as a query param for the next page.\n" +
-      "- Some operations modify X or Xquik resources. Show the exact payload, target, and cost before calling them.\n\n" +
-      "## Error handling\n" +
-      "- 402: Subscription required or insufficient credits. Explain the account state and direct the user to the dashboard before retrying.\n" +
-      "- 429: Rate limited. Retry after backoff.\n" +
-      "- 404: Resource not found (user, tweet, or monitor does not exist).\n" +
-      "- 200 with `warning` field: Probable success - do NOT retry.\n\n" +
-      "## Costs\n" +
-      "- Free: compose, styles, drafts, radar, account info, support, credit balance, and webhook management.\n" +
-      "- 1 credit/read: tweet search, timeline, bookmarks, favoriters.\n" +
-      "- 10 credits/write: tweet, like, retweet, follow, DM.\n\n" +
-      "## Input format\n" +
-      "Provide a bounded request function using `xquik.request(path, { method?, body?, query? })`. Auth is automatic.\n\n" +
-      "## Examples\n" +
-      "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI agents', limit: '50' } })`\n" +
-      "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`\n" +
+    description: description([
+      "Send confirmed Xquik API requests across 100+ REST endpoints.",
+      "",
+      "## When to use",
+      "- Use after calling 'explore' to discover the endpoint path and parameters.",
+      "- Use for live X/Twitter operations such as tweet search, user lookup, giveaway draws, extraction jobs, composition, private reads, persistent monitors, webhooks, and confirmation-gated writes.",
+      "- Confirm private reads, persistent resources, metered operations, and writes before using endpoints that require user approval.",
+      "",
+      "## When NOT to use",
+      "- Do NOT use to discover endpoints - use 'explore' first.",
+      "- Do NOT pass API keys or auth headers - authentication is injected automatically.",
+      "",
+      "## Behavior",
+      "- Processes the provided request function with `xquik.request(path, options?)` and `spec.endpoints` available.",
+      "- No filesystem or arbitrary network access - only xquik.request() is available.",
+      "- Timeout: 60 seconds per invocation, 60 seconds per individual API request.",
+      "- Read operations return JSON objects with the requested data.",
+      "- Mutating operations require prior user confirmation and return `{ success: true }` or `{ success: true, warning: '...' }`.",
+      "- Pagination responses include `has_next_page` and `next_cursor`. Pass `cursor` as a query param for the next page.",
+      "- Some operations modify X or Xquik resources. Show the exact payload, target, and usage estimate before calling them.",
+      "",
+      "## Error handling",
+      "- 402: Account access or usage balance requires dashboard attention. Explain the account state and direct the user to the dashboard before retrying.",
+      "- 429: Rate limited. Retry after backoff.",
+      "- 404: Resource not found, such as a missing user, tweet, or monitor.",
+      "- 200 with `warning` field: Probable success - do NOT retry.",
+      "",
+      "## Input format",
+      "Provide a bounded request function using `xquik.request(path, { method?, body?, query? })`. Auth is automatic.",
+      "",
+      "## Examples",
+      "Search tweets: `async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI agents', limit: '50' } })`",
+      "Get user: `async () => xquik.request('/api/v1/x/users/elonmusk')`",
       "After explicit user confirmation, post tweet: `async () => xquik.request('/api/v1/x/tweets', { method: 'POST', body: { account: '<confirmed_account>', text: '<confirmed_text>' } })`",
-    inputSchema: {
-      type: "object",
-      properties: {
-        code: {
-          type: "string",
-          maxLength: 4096,
-          description:
-            "Bounded request function that calls xquik.request(path, options?) to perform X/Twitter API operations. Auth is injected automatically. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI', limit: '20' } })",
-        },
-      },
-      required: ["code"],
-    },
+    ]),
+    inputSchema: codeInputSchema(
+      "Bounded request function that calls xquik.request(path, options?) to perform X/Twitter API operations. Auth is injected automatically. Example: async () => xquik.request('/api/v1/x/tweets/search', { query: { q: 'AI', limit: '20' } })",
+    ),
     annotations: {
       destructiveHint: true,
       idempotentHint: false,
@@ -123,64 +136,59 @@ function send(msg) {
   process.stdout.write(json + "\n");
 }
 
+function sendResult(id, result) {
+  send({ jsonrpc: JSONRPC, id, result });
+}
+
+function sendError(id, code, message) {
+  send({ jsonrpc: JSONRPC, id, error: { code, message } });
+}
+
+function isObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function isKnownTool(name) {
+  return TOOLS.some((tool) => tool.name === name);
+}
+
+function sendStubToolResult(id) {
+  sendResult(id, {
+    content: [{ type: "text", text: LIVE_SERVER_MESSAGE }],
+  });
+}
+
 function handleMessage(msg) {
   const { id, method, params } = msg;
 
   switch (method) {
     case "initialize":
-      return send({
-        jsonrpc: "2.0",
-        id,
-        result: {
-          protocolVersion: "2024-11-05",
-          serverInfo: SERVER_INFO,
-          capabilities: CAPABILITIES,
-        },
+      return sendResult(id, {
+        protocolVersion: "2024-11-05",
+        serverInfo: SERVER_INFO,
+        capabilities: CAPABILITIES,
       });
 
     case "notifications/initialized":
       return; // no response needed
 
     case "tools/list":
-      return send({
-        jsonrpc: "2.0",
-        id,
-        result: { tools: TOOLS },
-      });
+      return sendResult(id, { tools: TOOLS });
 
     case "tools/call": {
       const toolName = params?.name;
-      if (toolName === "explore" || toolName === "xquik") {
-        return send({
-          jsonrpc: "2.0",
-          id,
-          result: {
-            content: [
-              {
-                type: "text",
-                text: `This is a verification stub. Connect to the live server at https://xquik.com/mcp for real API access. Configure with: { "mcpServers": { "xquik": { "url": "https://xquik.com/mcp", "headers": { "x-api-key": "<YOUR_API_KEY>" } } } }`,
-              },
-            ],
-          },
-        });
+      if (isKnownTool(toolName)) {
+        return sendStubToolResult(id);
       }
-      return send({
-        jsonrpc: "2.0",
-        id,
-        error: { code: -32601, message: `Unknown tool: ${toolName}` },
-      });
+      return sendError(id, -32601, `Unknown tool: ${toolName}`);
     }
 
     case "ping":
-      return send({ jsonrpc: "2.0", id, result: {} });
+      return sendResult(id, {});
 
     default:
       if (id !== undefined) {
-        return send({
-          jsonrpc: "2.0",
-          id,
-          error: { code: -32601, message: `Method not found: ${method}` },
-        });
+        return sendError(id, -32601, `Method not found: ${method}`);
       }
   }
 }
@@ -192,7 +200,7 @@ rl.on("line", (line) => {
 
   try {
     const msg = JSON.parse(line);
-    if (msg !== null && typeof msg === "object" && !Array.isArray(msg)) {
+    if (isObject(msg)) {
       handleMessage(msg);
     }
   } catch {

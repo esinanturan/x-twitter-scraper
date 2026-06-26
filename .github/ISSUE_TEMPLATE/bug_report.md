@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a problem with the skill or MCP server
+about: Report a problem with the skill, MCP setup, task guide, command, or package metadata
 title: "[Bug] "
 labels: bug
 ---
@@ -19,7 +19,7 @@ What should happen.
 What actually happens. Include error messages and stack traces.
 
 ## Environment
-- Agent (Claude Code, Cursor, Codex, etc.):
+- Client or integration (Claude Code, Cursor, Codex, MCP client, package install, etc.):
 - Version:
 - OS:
 

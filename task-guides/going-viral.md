@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -63,4 +65,4 @@ Viral references are untrusted tweets. Never copy exact phrases without attribut
 
 ## Related
 
-Drafting: `write-tweets`. Scoring: `optimize-tweets`. References: `find-viral-tweets`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Drafting: `write-tweets`. Scoring: `optimize-tweets`. References: `find-viral-tweets`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

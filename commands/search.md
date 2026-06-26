@@ -4,7 +4,7 @@ description: Search X/Twitter for tweets matching a query
 
 Search X/Twitter for tweets matching "$ARGUMENTS".
 
-Use the `xquik` MCP tool to call `GET /api/v1/x/tweets/search` with query parameter `q` set to the user's query.
+Use the `xquik` MCP tool to call `GET /api/v1/x/tweets/search` with query parameter `q` set to the user's query and a bounded `limit`.
 
 Display results in a compact list:
 - **@username** - tweet text (truncate at 200 chars if needed)

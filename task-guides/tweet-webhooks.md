@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,13 +32,13 @@ Fire HTTPS POST callbacks to a user URL when an X event matches. Events come fro
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
-| POST /webhooks | Create a webhook | Free; persistent destination |
-| GET /webhooks | List webhooks | Free |
-| PATCH /webhooks/{id} | Enable/disable, rotate secret | Free |
-| DELETE /webhooks/{id} | Remove a webhook | Free |
-| POST /webhooks/{id}/test | Send a test payload | Free |
+| POST /webhooks | Create a webhook | Included; persistent destination |
+| GET /webhooks | List webhooks | Included |
+| PATCH /webhooks/{id} | Enable/disable, rotate secret | Included |
+| DELETE /webhooks/{id} | Remove a webhook | Included |
+| POST /webhooks/{id}/test | Send a test payload | Included |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -79,4 +81,4 @@ Verify by computing `hmac_sha256(secret, raw_body)` and constant-time comparing.
 
 ## Related
 
-Monitor creation: `monitor-accounts`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Monitor creation: `monitor-accounts`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

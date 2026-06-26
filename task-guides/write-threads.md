@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,7 +32,7 @@ Draft multi-tweet threads on X. This skill produces the thread text; publishing 
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /compose (step=compose/refine) | Get guidance for the thread topic and tone | Compose tier |
 | POST /drafts | Save a thread draft | Read tier |
@@ -56,7 +58,7 @@ Use the returned guidance to draft the thread in chat. Keep each tweet within th
 1. `POST /compose` with `step: "compose"` for the topic.
 2. Show all tweets in order to the user and wait for approval.
 3. For each tweet in sequence:
-   - Post the first via `post-tweets` skill.
+   - Post the first via `post-tweets` guide.
    - Capture the returned `id`.
    - Post the next with `reply_to_tweet_id` = previous id.
 4. Stop and surface any error instead of continuing silently.
@@ -67,4 +69,4 @@ Never publish a thread without user review of every tweet in order. Threads ampl
 
 ## Related
 
-Single tweets: `write-tweets`. Publishing: `post-tweets`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Single tweets: `write-tweets`. Publishing: `post-tweets`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

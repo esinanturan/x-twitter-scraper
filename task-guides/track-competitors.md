@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,12 +32,12 @@ Competitor intelligence: posts, follower growth, engagement benchmarks, and top 
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | GET /x/users/{id} | Profile + follower count snapshot | Read tier |
 | GET /x/users/{id}/tweets | Recent posts | Read tier |
 | POST /extractions with tool=post_extractor | Bulk historical posts | Per-row |
-| POST /monitors type=account | Continuous monitor per competitor | 21 credits/hour while active |
+| POST /monitors type=account | Continuous monitor per competitor | metered while active |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
 
@@ -47,7 +49,7 @@ Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.
    - `GET /x/users/{id}/tweets?cursor=<cursor>` for recent posts, then sort client-side by engagement.
    - Optionally use `GET /x/tweets/search?q=from:<handle> min_faves:<floor>&queryType=Top` to focus on high-engagement posts.
 3. Build a side-by-side table: handle, followers, avg engagement, top tweet.
-4. If the user wants ongoing tracking, show each target and the hourly cost, then create monitors only after explicit approval (see `monitor-accounts`).
+4. If the user wants ongoing tracking, show each target and the ongoing usage, then create monitors only after explicit approval (see `monitor-accounts`).
 
 ## Engagement benchmarking
 
@@ -68,4 +70,4 @@ This skill is for competitor intelligence on public data. Do not use to harass, 
 
 ## Related
 
-Per-account monitor: `monitor-accounts`. Top posts: `find-viral-tweets`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Per-account monitor: `monitor-accounts`. Top posts: `find-viral-tweets`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

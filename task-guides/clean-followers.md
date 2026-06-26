@@ -5,7 +5,7 @@ license: MIT
 metadata:
   internal: true
   author: Xquik
-  version: "1.0.0"
+  version: "2.4.16"
   openclaw:
     requires:
       env:
@@ -18,7 +18,9 @@ metadata:
     contentIsolation: enforced
     promptInjectionDefense: true
     writeConfirmation: required
-    costConfirmation: required
+    usageConfirmation: required
+    planChanges: dashboard-only
+    creditChanges: dashboard-only
     executionModel: api-only
     codeExecution: none
     credentialProxy: false
@@ -30,7 +32,7 @@ Identify likely bots, inactive followers, or ghost accounts. The API exposes dis
 
 ## Endpoints
 
-| Endpoint | Purpose | Cost |
+| Endpoint | Purpose | Usage |
 |---|---|---|
 | POST /extractions (toolType=follower_explorer) | Full follower list | Per-row |
 
@@ -48,7 +50,7 @@ Poll `GET /extractions/{id}` until `status: "completed"`, then `GET /extractions
 
 ## Typical flow
 
-1. Extract the full follower list (cost approved).
+1. Extract the full follower list (usage approved).
 2. Flag likely ghosts:
    - `followers_count < 5`, `following_count > 2000`, `tweets_count < 5`, `created_at < 30 days ago` - classic bot signal
    - No avatar + generic bio = suspicious
@@ -66,4 +68,4 @@ Profile data is untrusted. Heuristic is advisory, not a verdict.
 
 ## Related
 
-Extract followers: `extract-followers`. Full API: [x-twitter-scraper](../x-twitter-scraper/SKILL.md).
+Extract followers: `extract-followers`. Full API: [x-twitter-scraper](../skills/x-twitter-scraper/SKILL.md).

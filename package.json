@@ -56,10 +56,21 @@
   ],
   "files": [
     ".codex-plugin",
+    ".claude-plugin",
+    ".mcp.json",
     "assets",
+    "commands",
+    "context7.json",
+    "logo.png",
+    "server.json",
+    "scripts",
     "skills",
     "!skills/_artifacts",
-    "openclaw.plugin.json"
+    "skills.sh.json",
+    "openclaw.plugin.json",
+    "start.sh",
+    "stub-server.mjs",
+    "task-guides"
   ],
   "scripts": {
     "check-versions": "node scripts/check-versions.mjs",
