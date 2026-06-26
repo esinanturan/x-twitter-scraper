@@ -1,7 +1,7 @@
 {
   "id": "x-developer",
   "name": "X Developer API",
-  "description": "X (Twitter) scraper API skill for AI agents with 100+ REST endpoints, MCP, webhooks, extraction workflows, and confirmation-gated actions.",
+  "description": "Xquik X Twitter scraper API skill and X API alternative for tweet search, follower export, social listening, 100+ REST endpoints, MCP, SDKs, webhooks, exports, 33x cheaper tweet reads, and gated actions.",
   "version": "2.4.16",
   "skills": ["./skills"],
   "providerAuthEnvVars": {

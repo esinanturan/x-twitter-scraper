@@ -97,7 +97,7 @@ Poll `GET /extractions/{id}`, retrieve results. Same pattern for `repost_extract
 
 To compare multiple tweets' engagement:
 
-1. Call `GET /x/tweets/{id}` for each tweet (batched via parallel fetches, respect Read tier 10/1s).
+1. Call `GET /x/tweets/{id}` for each tweet (batched via parallel fetches, respect Read tier 60/1s).
 2. Present metrics side-by-side. Highlight which tweet had the highest engagement rate (likes + RTs + quotes) / impressions.
 
 For longer-term account performance (trends in the account's own tweet engagement over days/weeks):
@@ -110,7 +110,7 @@ Returns rolling per-tweet metrics for that account.
 
 ## Cost control
 
-Metrics endpoints are Read tier (1-5 credits per call). Bulk `favoriters` can list thousands of accounts at per-result pricing - always estimate first and show the user the expected cost.
+Metrics endpoints are metered read calls. Bulk `favoriters` can list thousands of accounts at per-result cost - always estimate first and show the user the expected usage.
 
 ## Errors
 

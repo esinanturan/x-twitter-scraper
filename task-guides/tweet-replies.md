@@ -33,7 +33,7 @@ Get replies to any public tweet on X. Useful for reading community reactions, pu
 | Endpoint | Purpose | Cost |
 |---|---|---|
 | GET /x/tweets/{id}/replies | Recent replies with pagination | Read tier |
-| POST /extractions with toolType=reply_extractor | Bulk replies (all pages, CSV/JSONL export) | Per-row extraction pricing |
+| POST /extractions with toolType=reply_extractor | Bulk replies (all pages, CSV/JSONL export) | Per-row extraction cost |
 | GET /x/tweets/{id} | Get the root tweet metadata (for context) | Read tier |
 
 Base URL: `https://xquik.com/api/v1`. Auth: `x-api-key: xq_...` header.

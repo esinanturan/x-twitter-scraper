@@ -5,14 +5,14 @@
     "email": "support@xquik.com"
   },
   "metadata": {
-    "description": "Xquik X/Twitter scraper API skill for AI coding agents. 100+ endpoints, MCP, webhooks, extraction workflows, and confirmation-gated actions.",
+    "description": "Xquik X Twitter scraper API skill and X API alternative for AI agents. Tweet search, follower export, social listening, 100+ endpoints, MCP, SDKs, webhooks, exports, 33x cheaper tweet reads, and confirmation-gated actions.",
     "version": "2.4.16"
   },
   "plugins": [
     {
       "name": "x-twitter-scraper",
       "source": "./",
-      "description": "100+ REST API endpoints, 2 MCP tools, 23 extraction types. Search tweets, export followers, inspect engagement, download media, run giveaway draws, monitor accounts, verify webhooks, and use confirmation-gated writes.",
+      "description": "100+ REST API endpoints, 2 MCP tools, 23 extraction types, SDKs, webhooks, exports, and tweet reads that are about 33x cheaper than official X API post reads. Search tweets, export followers, run social listening, inspect engagement, monitor accounts, and use confirmation-gated writes.",
       "version": "2.4.16",
       "author": {
         "name": "Xquik"
@@ -23,7 +23,19 @@
       "keywords": [
         "twitter",
         "x-api",
+        "x-api-alternative",
+        "twitter-api-alternative",
+        "twitter-scraper-api",
+        "twitter-data-api",
+        "x-data-api",
+        "tweet-search-api",
+        "tweet-analytics",
+        "twitter-monitoring",
+        "social-listening",
+        "sentiment-analysis",
+        "competitor-monitoring",
         "mcp-server",
+        "x-mcp",
         "data-extraction",
         "giveaway",
         "monitoring",
@@ -37,7 +49,9 @@
       "tags": [
         "twitter",
         "x",
+        "x-api-alternative",
         "social-media",
+        "social-listening",
         "mcp",
         "usage-estimates"
       ]
