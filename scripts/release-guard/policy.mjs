@@ -34,6 +34,9 @@ export const versionSurfaces = [
 
 export const skillFrontmatterExpectations = {
   scalars: {
+    author: "Xquik <support@xquik.com>",
+    compatibility:
+      "Requires internet access to call the first-party Xquik REST API.",
     "metadata.author": "Xquik",
     "metadata.capabilities.network.allowed": true,
     "metadata.capabilities.shell.allowed": false,
@@ -72,6 +75,7 @@ export const skillFrontmatterExpectations = {
     "metadata.security.securityReference": "references/security.md",
   },
   arrays: {
+    tags: ["twitter", "x", "social-media", "api-development", "scraping"],
     "metadata.capabilities.network.hosts": ["xquik.com", "docs.xquik.com"],
     "metadata.capabilities.environment.required": ["XQUIK_API_KEY"],
     "metadata.capabilities.environment.optional": ["XQUIK_WEBHOOK_SECRET"],
