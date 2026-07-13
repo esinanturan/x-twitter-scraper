@@ -4,7 +4,9 @@ export const contentChecks = [
   {
     path: "README.md",
     required: [
-      "100+ REST API endpoints",
+      "123 REST API operations",
+      "118 MCP operations through 2 tools",
+      "MCP v2.5.0",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
       "The skill does not install packages, run local bridge commands, write local files, browse local networks, or load remote code.",
@@ -18,6 +20,7 @@ export const contentChecks = [
       "### Per-Operation Usage Credits",
       "113 REST API endpoints",
       "112 REST API endpoints",
+      "100+ REST API endpoints",
       "Works with all 113 endpoints",
       "@latest",
       "npx skills add Xquik-dev/x-twitter-scraper",
@@ -110,6 +113,8 @@ export const contentChecks = [
     required: [
       "https://xquik.com/mcp",
       "OpenAI Agents SDK",
+      "118 operations through 2 structured API tools",
+      "118 of 123 documented REST operations",
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
     ],
     forbidden: [
@@ -123,6 +128,9 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
+      "MCP v2.5.0 exposes 118 of 123 REST operations",
+      "Saved-payment top-ups",
+      "Dashboard checkout redirects",
     ],
     forbidden: [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Free |",
@@ -140,13 +148,22 @@ export const contentChecks = [
   },
   {
     path: ".claude-plugin/plugin.json",
-    required: ["100+ endpoints"],
+    required: ["118 MCP operations through 2 tools"],
     forbidden: [
       "113 endpoints",
       "112 endpoints",
+      "100+ endpoints",
       blocked("pay-", "per-use"),
       blocked("$", "0", "."),
     ],
+  },
+  {
+    path: ".codex-plugin/plugin.json",
+    required: [
+      "123 REST operations",
+      "118 MCP operations through 2 tools",
+    ],
+    forbidden: ["100+ endpoints", blocked("$", "0", ".")],
   },
   {
     path: ".claude-plugin/marketplace.json",
@@ -205,13 +222,15 @@ export const contentChecks = [
     path: "server.json",
     required: [
       '"title": "Xquik MCP Server"',
-      "100+ REST endpoints",
+      "123 REST operations",
+      "118 MCP operations through 2 tools",
       '"websiteUrl": "https://docs.xquik.com/mcp/overview"',
       '"name": "x-api-key"',
     ],
     forbidden: [
       "113 REST endpoints",
       "112 REST endpoints",
+      "100+ REST endpoints",
       '"name": "Authorization"',
       "Bearer {XQUIK_API_KEY}",
     ],
@@ -219,8 +238,7 @@ export const contentChecks = [
   {
     path: "stub-server.mjs",
     required: [
-      "100+ endpoints",
-      "100+ REST endpoints",
+      "118 MCP operations",
       "Send confirmed Xquik API requests",
       '"x-api-key": "<YOUR_API_KEY>"',
       "included usage or requires account access",
@@ -231,6 +249,8 @@ export const contentChecks = [
       "113 REST endpoints",
       "112 endpoints",
       "112 REST endpoints",
+      "100+ endpoints",
+      "100+ REST endpoints",
       blocked("$", "0", "."),
       "Execute authenticated",
       "Execute confirmed Xquik API calls",

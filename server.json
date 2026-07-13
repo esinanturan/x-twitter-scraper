@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.xquik/mcp",
   "title": "Xquik MCP Server",
-  "description": "X data workflows for tweet search, follower export, social listening, 100+ REST endpoints, MCP tools, SDKs, webhooks, exports, and confirmation-gated writes.",
+  "description": "X data workflows with 123 REST operations and 118 MCP operations through 2 tools, plus SDKs, webhooks, exports, and confirmation-gated writes.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"
   },
   "websiteUrl": "https://docs.xquik.com/mcp/overview",
-  "version": "2.4.17",
+  "version": "2.5.0",
   "remotes": [
     {
       "type": "streamable-http",

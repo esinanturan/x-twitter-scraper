@@ -21,7 +21,9 @@
 
 This repository packages Xquik as an [AI agent skill](https://skills.sh) for Claude Code, OpenAI Codex, Cursor, GitHub Copilot, Gemini CLI, Windsurf, and other skills-compatible agents. It helps agents choose the right REST endpoint, MCP tool, SDK, webhook, extraction, export, or approval-gated workflow without guessing.
 
-Includes 100+ REST API endpoints (123 documented operations), 2 MCP tools, HMAC webhooks, 23 bulk extraction tools, Xquik SDK pointers, and confirmation-gated write actions.
+Includes 123 REST API operations, HMAC webhooks, 23 extraction tools, SDK pointers, and confirmation-gated writes.
+
+MCP v2.5.0 exposes 118 MCP operations through 2 tools. It excludes 5 sensitive REST operations. These cover API key creation, listing, and revocation, saved-payment top-ups, and dashboard checkout redirects.
 
 ## Why Teams Use Xquik
 
@@ -170,14 +172,14 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring
 - **Usage guardrails**: Check balance and estimate usage; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: 2 tools covering 100+ endpoints for AI agent integration
+- **MCP server**: MCP v2.5.0 exposes 118 operations through 2 tools
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 100+ endpoints across 10 categories with retry logic and pagination |
-| **MCP Server** | 2 tools (explore + xquik). StreamableHTTP, configs for 10 platforms |
+| **REST API** | 123 operations across 10 categories with retry logic and pagination |
+| **MCP Server** | 118 operations through 2 tools (`explore` + `xquik`), with Streamable HTTP configs for 10 platforms |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, and confirmation-gated private reads |
 | **Write Actions** | Confirmation-gated post/delete tweets, like/unlike, retweet, follow/unfollow, remove followers, DM, profile update, avatar/banner, media upload, community actions |

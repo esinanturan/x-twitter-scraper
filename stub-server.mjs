@@ -8,7 +8,7 @@ import { createInterface } from "node:readline";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.4.17",
+  version: "2.5.0",
 };
 
 const CAPABILITIES = {
@@ -54,7 +54,7 @@ const TOOLS = [
       "- Do NOT use if you already know the endpoint path and parameters.",
       "",
       "## Behavior",
-      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 100+ endpoints.",
+      "- Read-only, idempotent. No network calls - runs against an in-memory catalog of 118 MCP operations.",
       "- Included usage and does not require authentication.",
       "- Returns the result of your filter function, such as an empty array if no endpoints match.",
       "- Returns a validation error if the request function is invalid.",
@@ -83,7 +83,7 @@ const TOOLS = [
   {
     name: "xquik",
     description: description([
-      "Send confirmed Xquik API requests across 100+ REST endpoints.",
+      "Send confirmed Xquik API requests across 118 MCP operations.",
       "",
       "## When to use",
       "- Use after calling 'explore' to discover the endpoint path and parameters.",
