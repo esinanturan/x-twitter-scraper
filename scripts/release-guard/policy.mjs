@@ -195,10 +195,6 @@ export const jsonFieldExpectations = [
       websiteUrl: "https://docs.xquik.com/mcp/overview",
       "remotes.0.type": "streamable-http",
       "remotes.0.url": "https://xquik.com/mcp",
-      "remotes.0.headers.0.name": "x-api-key",
-      "remotes.0.headers.0.isRequired": true,
-      "remotes.0.headers.0.isSecret": true,
-      "remotes.0.headers.0.variables.XQUIK_API_KEY.isSecret": true,
     },
   },
   {

@@ -13,18 +13,10 @@ meta:
     - remote
 about:
   title: Xquik
-  description: X (Twitter) data platform with 123 REST operations and 118 MCP operations through 2 tools. Not affiliated with X Corp.
+  description: X (Twitter) data platform with 126 REST operations and 118 MCP operations through 2 tools. Not affiliated with X Corp.
   icon: https://www.google.com/s2/favicons?domain=xquik.com&sz=64
 source:
   project: https://github.com/Xquik-dev/x-twitter-scraper
 remote:
   transport_type: streamable-http
   url: https://xquik.com/mcp
-  headers:
-    x-api-key: "${XQUIK_REMOTE_API_KEY}"
-config:
-  description: Configure the connection to Xquik
-  secrets:
-    - name: xquik-remote.api_key
-      env: XQUIK_REMOTE_API_KEY
-      example: xq_YOUR_API_KEY_HERE

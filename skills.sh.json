@@ -4,7 +4,7 @@
   "groupings": [
     {
       "title": "Core API",
-      "description": "Start with safe Xquik setup, API-key auth, MCP, SDKs, and broad X data workflows.",
+      "description": "Start with OAuth-first MCP, API-key REST auth, SDKs, and broad X data workflows.",
       "skills": ["x-twitter-scraper"]
     },
     {

@@ -23,9 +23,9 @@ This repository packages Xquik as an [AI agent skill](https://skills.sh) for Cla
 
 The npm package `x-developer` is this agent skill and plugin bundle. The separate `x-twitter-scraper` package is the typed TypeScript SDK.
 
-Includes 123 REST API operations, HMAC webhooks, 23 extraction tools, SDK pointers, and confirmation-gated writes.
+Includes 126 REST API operations, HMAC webhooks, 23 extraction tools, SDK pointers, and confirmation-gated writes.
 
-MCP v2.5.2 exposes 118 MCP operations through 2 tools. It excludes 5 sensitive REST operations. These cover API key creation, listing, and revocation, saved-payment top-ups, and dashboard checkout redirects.
+MCP v2.5.3 exposes 118 MCP operations through 2 tools. Add `https://xquik.com/mcp` and complete OAuth 2.1 in the client. API keys remain a fallback. Eight credential or session-bound REST operations remain outside MCP: 3 account API-key operations, saved-payment top-up, account top-up redirect, and 3 guest-wallet credential operations.
 
 ## Why Teams Use Xquik
 
@@ -174,14 +174,14 @@ When installed, this skill gives your AI coding assistant deep knowledge of the 
 - **Tweet composition**: Algorithm-optimized tweet composer with scoring
 - **Usage guardrails**: Check balance and estimate usage; dashboard handles plan and credit changes
 - **Support tickets**: Open and manage support tickets via API
-- **MCP server**: MCP v2.5.2 exposes 118 operations through 2 tools
+- **MCP server**: MCP v2.5.3 exposes 118 operations through 2 tools with OAuth 2.1 discovery
 
 ## Capabilities
 
 | Area | Details |
 |------|---------|
-| **REST API** | 123 operations across 10 categories with retry logic and pagination |
-| **MCP Server** | 118 operations through 2 tools (`explore` + `xquik`), with Streamable HTTP configs for 10 platforms |
+| **REST API** | 126 operations across 10 categories with retry logic and pagination |
+| **MCP Server** | 118 operations through 2 tools (`explore` + `xquik`), with OAuth-first Streamable HTTP setup |
 | **Data Extraction** | 23 bulk extraction tools (replies, retweets, quotes, favoriters, threads, articles, user likes, user media, communities, lists, Spaces, people search, tweet search, mentions, posts) |
 | **X Lookups** | Tweet, user, article, search, user tweets, user likes, user media, favoriters, mutual followers, and confirmation-gated private reads |
 | **Write Actions** | Confirmation-gated post/delete tweets, like/unlike, retweet, follow/unfollow, remove followers, DM, profile update, avatar/banner, media upload, community actions |

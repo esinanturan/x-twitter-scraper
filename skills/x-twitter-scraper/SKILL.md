@@ -3,13 +3,13 @@ name: x-twitter-scraper
 description: "Use Xquik for X/Twitter REST, MCP, SDKs, search, exports, monitoring & approved publishing. Not affiliated with X Corp. Trigger for tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Read-only by default. Require explicit approval for writes, private reads, monitors, webhooks & metered bulk jobs."
 allowed-tools: WebFetch
 argument-hint: "[Xquik task, target, or setup goal]"
-version: "2.5.2"
+version: "2.5.3"
 author: Xquik <support@xquik.com>
 license: MIT
 compatibility: Requires internet access to call the first-party Xquik REST API.
 tags: [twitter, x, social-media, api-development, scraping]
 metadata:
-  version: "2.5.2"
+  version: "2.5.3"
   author: Xquik
   compatibility: Requires internet access to call the first-party Xquik REST API.
   tags: [twitter, x, social-media, api-development, scraping]
@@ -335,7 +335,7 @@ See [api endpoints](references/api-endpoints.md), [draws](references/draws.md), 
 
 ## MCP Server
 
-The MCP endpoint is the `/mcp` route on the first-party Xquik host and uses the same API key.
+The MCP endpoint is the `/mcp` route on the first-party Xquik host. Prefer OAuth 2.1 discovery. Use a scoped API key only when the client cannot complete OAuth.
 
 Available tools:
 

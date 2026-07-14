@@ -7,7 +7,7 @@ Docker will list the remote endpoint directly.
 
 The `xquik-remote/` directory contains the 3 required files:
 
-- `server.yaml` - Server metadata (remote type, StreamableHTTP, API key auth)
+- `server.yaml` - Server metadata for OAuth-enabled Streamable HTTP
 - `readme.md` - Link to docs
 - `tools.json` - Tool definitions for explore and xquik tools
 
@@ -39,6 +39,6 @@ The `xquik-remote/` directory contains the 3 required files:
 
 6. Create PR to docker/mcp-registry with title: "Add xquik-remote MCP server"
 
-7. Share the test API key via the form: https://forms.gle/6Lw3nsvu2d6nFg8e6
+7. Confirm Docker opens Xquik OAuth and completes browser authorization.
 
 8. Wait for Docker team review (catalog entry available within 24h of approval).

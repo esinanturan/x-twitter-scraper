@@ -10,12 +10,12 @@ that points at the existing endpoint.
 - Server URL: `https://xquik.com/mcp`
 - Transport: Streamable HTTP
 - Repository: `https://github.com/Xquik-dev/x-twitter-scraper`
-- Version: `2.5.2`
-- Description: `X data platform with 123 REST operations, 118 MCP operations through 2 tools, webhooks, SDKs, and confirmed writes. Not affiliated with X Corp.`
+- Version: `2.5.3`
+- Description: `X data platform with 126 REST operations, 118 MCP operations through 2 tools, webhooks, SDKs, and confirmed writes. Not affiliated with X Corp.`
 - Categories: Social Media, Automation, Search, Data, Monitoring, Web Scraping, AI Agents
-- Auth header: `x-api-key`
-- Auth value template: `{XQUIK_API_KEY}`
-- API key source: Xquik dashboard account page
+- Authentication: OAuth 2.1 discovery
+- Protected resource metadata: `https://xquik.com/.well-known/oauth-protected-resource/mcp`
+- Authorization server metadata: `https://xquik.com/.well-known/oauth-authorization-server`
 
 ## Submission Flow
 
@@ -23,19 +23,15 @@ that points at the existing endpoint.
 2. Start a marketplace submission or new project from the MCPize dashboard.
 3. Select an existing remote MCP server when that option is available.
 4. Enter the listing details above.
-5. Keep API keys out of public forms and repositories. Use the placeholder
-   value template for docs or metadata.
-6. If MCPize requires hosted deployment instead of a remote URL, create a thin
-   adapter task that forwards to `https://xquik.com/mcp` and preserves the
-   incoming `x-api-key` header.
-7. Test the listing with an Xquik API key owned by the submitter.
+5. Leave manual client ID and client secret fields empty when discovery works.
+6. Do not add a local bridge or hosted forwarding adapter.
+7. Test browser authorization through the marketplace client.
 8. Update public docs with the MCPize listing URL only after the listing is
    live.
 
 ## Acceptance Checks
 
 - Searching MCPize for `xquik` returns the listing.
-- The listing shows `https://xquik.com/mcp` as the remote server URL or uses an
-  approved adapter that targets it.
-- The install instructions show `x-api-key: {XQUIK_API_KEY}`.
+- The listing shows `https://xquik.com/mcp` as the remote server URL.
+- The install flow opens Xquik OAuth without requesting an API key.
 - The listing description matches `server.json`.

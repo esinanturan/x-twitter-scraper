@@ -8,7 +8,7 @@ import { createInterface } from "node:readline";
 
 const SERVER_INFO = {
   name: "xquik",
-  version: "2.5.2",
+  version: "2.5.3",
 };
 
 const CAPABILITIES = {
@@ -18,7 +18,7 @@ const CAPABILITIES = {
 const MAX_LINE_LENGTH = 64 * 1024;
 const JSONRPC = "2.0";
 const LIVE_SERVER_MESSAGE =
-  'This is a verification stub. Connect to the live server at https://xquik.com/mcp for real API access. Configure with: { "mcpServers": { "xquik": { "url": "https://xquik.com/mcp", "headers": { "x-api-key": "<YOUR_API_KEY>" } } } }';
+  "This is a verification stub. Add https://xquik.com/mcp to your MCP client and complete OAuth 2.1 for live API access. API keys remain a bearer-token fallback.";
 
 function description(lines) {
   return lines.join("\n");

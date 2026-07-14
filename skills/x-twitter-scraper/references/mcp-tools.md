@@ -157,13 +157,16 @@ Use `POST /api/v1/extractions` ONLY for bulk data that simpler endpoints cannot 
 
 ## REST-only operations
 
-MCP v2.5.2 exposes 118 of 123 REST operations. These 5 sensitive operations remain outside MCP:
+MCP v2.5.3 exposes 118 of 126 REST operations. These 8 credential or session-bound operations remain outside MCP:
 
 - API key creation
 - API key listing
 - API key revocation
 - Saved-payment top-ups
 - Dashboard checkout redirects
+- Guest wallet creation
+- Guest wallet status polling
+- Guest wallet top-ups
 
 ## Usage Reference
 

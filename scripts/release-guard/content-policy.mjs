@@ -18,9 +18,9 @@ export const contentChecks = [
   {
     path: "README.md",
     required: [
-      "123 REST API operations",
+      "126 REST API operations",
       "118 MCP operations through 2 tools",
-      "MCP v2.5.2",
+      "MCP v2.5.3",
       "## Agent Safety And Account Boundary",
       "Plan and credit changes stay in the Xquik dashboard.",
       "The npm package `x-developer` is this agent skill and plugin bundle. The separate `x-twitter-scraper` package is the typed TypeScript SDK.",
@@ -127,7 +127,7 @@ export const contentChecks = [
       "https://xquik.com/mcp",
       "OpenAI Agents SDK",
       "118 operations through 2 structured API tools",
-      "118 of 123 documented REST operations",
+      "118 of 126 documented REST operations",
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
     ],
     forbidden: [
@@ -141,7 +141,7 @@ export const contentChecks = [
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
       "Included usage flag from endpoint metadata",
       "Find all included-usage endpoints",
-      "MCP v2.5.2 exposes 118 of 123 REST operations",
+      "MCP v2.5.3 exposes 118 of 126 REST operations",
       "Saved-payment top-ups",
       "Dashboard checkout redirects",
     ],
@@ -173,7 +173,7 @@ export const contentChecks = [
   {
     path: ".codex-plugin/plugin.json",
     required: [
-      "123 REST operations",
+      "126 REST operations",
       "118 MCP operations through 2 tools",
     ],
     forbidden: ["100+ endpoints", dollarDenominatedPricing],
@@ -222,17 +222,15 @@ export const contentChecks = [
     path: "server.json",
     required: [
       '"title": "Xquik MCP Server"',
-      "123 REST operations",
+      "126 REST operations",
       "118 MCP operations through 2 tools",
       '"websiteUrl": "https://docs.xquik.com/mcp/overview"',
-      '"name": "x-api-key"',
     ],
     forbidden: [
       "113 REST endpoints",
       "112 REST endpoints",
       "100+ REST endpoints",
-      '"name": "Authorization"',
-      "Bearer {XQUIK_API_KEY}",
+      '"headers"',
     ],
   },
   {
@@ -240,7 +238,7 @@ export const contentChecks = [
     required: [
       "118 MCP operations",
       "Send confirmed Xquik API requests",
-      '"x-api-key": "<YOUR_API_KEY>"',
+      "complete OAuth 2.1 for live API access",
       "included usage or requires account access",
       "Find all included-usage endpoints",
     ],
@@ -259,6 +257,7 @@ export const contentChecks = [
       "Always free",
       "Find all free endpoints",
       blocked("Call `POST /api/v1/", "sub", "scribe`"),
+      '"x-api-key": "<YOUR_API_KEY>"',
       '"Authorization": "Bearer <YOUR_API_KEY>"',
     ],
   },

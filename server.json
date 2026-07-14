@@ -2,32 +2,17 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.xquik/mcp",
   "title": "Xquik MCP Server",
-  "description": "123 REST operations & 118 MCP operations through 2 tools. Not affiliated with X Corp.",
+  "description": "126 REST operations, 118 MCP operations through 2 tools. OAuth 2.1. Not affiliated with X Corp.",
   "repository": {
     "url": "https://github.com/Xquik-dev/x-twitter-scraper",
     "source": "github"
   },
   "websiteUrl": "https://docs.xquik.com/mcp/overview",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://xquik.com/mcp",
-      "headers": [
-        {
-          "name": "x-api-key",
-          "value": "{XQUIK_API_KEY}",
-          "description": "Xquik API key from your dashboard account page",
-          "isRequired": true,
-          "isSecret": true,
-          "variables": {
-            "XQUIK_API_KEY": {
-              "description": "Your Xquik API key (starts with xq_)",
-              "isSecret": true
-            }
-          }
-        }
-      ]
+      "url": "https://xquik.com/mcp"
     }
   ]
 }
