@@ -73,6 +73,13 @@ codex mcp login xquik
 codex mcp list
 ```
 
+> **Codex OAuth compatibility:** Codex releases affected by
+> [openai/codex#31573](https://github.com/openai/codex/issues/31573) discard the
+> RFC 9207 `iss` callback value and fail before token exchange. If login reports
+> `Authorization server response missing required issuer`, use the API-key
+> fallback below until a fixed Codex release is installed. Xquik already
+> returns and advertises the required issuer.
+
 ### Codex Desktop
 
 1. Open **Settings > MCP servers**.
