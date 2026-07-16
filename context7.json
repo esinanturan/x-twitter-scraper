@@ -24,6 +24,8 @@
   "rules": [
     "Use README.md for installation, comparison copy, SDK links, API coverage, and MCP setup.",
     "Use skills/x-twitter-scraper/SKILL.md as the primary agent operating guide.",
+    "Use https://docs.xquik.com/mcp/overview#client-compatibility as the canonical current MCP client matrix. Do not assume every client supports OAuth: Cline and Qwen Code support OAuth; affected Codex and Goose releases need environment-backed API keys; Roo Code's archived final release is API-key-only; Pi has no native MCP client.",
+    "If Codex reports Authorization server response missing required issuer: expected https://xquik.com, do not repeat OAuth. Affected Codex releases discard the RFC 9207 iss value even though Xquik returns it. Set XQUIK_API_KEY and bearer_token_env_var = \"XQUIK_API_KEY\" in Codex TOML, then use https://docs.xquik.com/guides/troubleshooting#codex-oauth-issuer-validation-error and track https://github.com/openai/codex/issues/31573.",
     "Use task-guides/*.md for task-specific workflows such as search, extraction, monitoring, webhooks, posting, and DMs.",
     "Use commands/*.md for slash-command examples.",
     "Keep implementation details public-safe; use Xquik API, read service, write service, or browser service wording."

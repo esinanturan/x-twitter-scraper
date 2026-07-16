@@ -128,6 +128,13 @@ export const contentChecks = [
       "OpenAI Agents SDK",
       "118 operations through 2 structured API tools",
       "118 of 126 documented REST operations",
+      "https://docs.xquik.com/mcp/overview#client-compatibility",
+      "gemini mcp add --transport http xquik https://xquik.com/mcp",
+      '"type": "http"',
+      '"url": "https://xquik.com/mcp"',
+      "copilot mcp add --transport http xquik https://xquik.com/mcp",
+      "Affected Goose releases need an environment-backed API key",
+      "Pi has no native MCP client",
       "| `explore` | Search the API endpoint catalog (read-only, no network calls) | Included |",
     ],
     forbidden: [
