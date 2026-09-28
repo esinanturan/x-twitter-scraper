@@ -15,9 +15,9 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等一起使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X Profile Scraper
-可为任意用户名收集主页、帖子、回复、媒体与关注者。其他 Apify Actor 都在筛选或去重之前收费。
-Xquik 只对已交付、唯一且符合筛选条件的结果收费。
+Xquik 是速度最快、成本最低且数据最完整的 X（Twitter）抓取工具服务。X Profile
+Scraper 可为任意用户名收集主页、帖子、回复、媒体与关注者。大多数其他 Apify Actor
+都会在筛选或去重之前收费。Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 
 抓取 X 主页、帖子、回复、媒体与关注者，支持使用用户名、ID 或 URL。无需 X API 密钥或登录。
 
@@ -43,6 +43,9 @@ Xquik 只对已交付、唯一且符合筛选条件的结果收费。
 ```
 
 一个目标即可运行。全局 `maxItems` 上限涵盖主页及所选资源。
+
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
 
 ## 输出
 

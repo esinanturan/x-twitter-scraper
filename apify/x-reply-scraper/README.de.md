@@ -16,9 +16,9 @@
 </td></tr></table>
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
-den umfassendsten X-Daten. X Reply Scraper sammelt Antworten, Kommentare
-& ganze Unterhaltungen. Jeder andere Apify Actor berechnet, bevor gefiltert
-oder dedupliziert wird. Xquik berechnet nur für gelieferte, eindeutige,
+den umfassendsten X-Daten. X Reply Scraper sammelt Antworten, Kommentare & ganze
+Unterhaltungen. Die meisten anderen Apify Actors berechnen, bevor gefiltert oder
+dedupliziert wird. Xquik berechnet nur für gelieferte, eindeutige,
 filterkonforme Ergebnisse.
 
 Scrape X-(Twitter-)Antworten für **$0.00015 pro gelieferten Datensatz auf
@@ -42,11 +42,13 @@ Ein erfolgreicher Actor-Abschluss bestätigt die Lieferung, nicht die
 vollständige Extraktion.
 
 Der Statustext nennt jede Ursache für einen vorzeitigen Stopp. `stopCauses`
-listet jede Ursache mit eigenen Feldern `message`, `retryable` &
-`nextAction`. Die Ursachen sind `target_failed`, `page_limit`, `reply_reach`
-& `deadline_reached`. `reply_reach` bedeutet, dass X nur einen Teil eines
-Threads geliefert hat. Der Run ist `retryable`, wenn mindestens 1 Ursache es
-ist.
+listet jede Ursache mit eigenen Feldern `message`, `retryable` & `nextAction`.
+Die Ursachen sind `target_not_found`, `target_failed`, `page_limit`,
+`reply_reach` & `deadline_reached`. `reply_reach` bedeutet, dass X nur einen
+Teil eines Threads geliefert hat. Ein fehlender Beitrag oder Account ist kein
+Fehler. Der Statustext nennt ihn, etwa „X has no match for 1 target." In
+`stopCauses` erscheint er nur, wenn eine andere Ursache den Run gestoppt hat.
+Der Run ist `retryable`, wenn mindestens 1 Ursache es ist.
 
 ## Was macht dieser Twitter-Antworten-Scraper?
 
@@ -434,10 +436,14 @@ Erfolgreiche Datendatensätze nutzen `resultType: "reply"`. Nicht-Daten-
 Abschlüsse schreiben genau 1 kostenlosen Datensatz in `diagnostics` mit
 einer verwertbaren Empfehlung.
 
-Jedes Ergebnis schreibt `run-report`, auch Abbrüche ohne Eingabe und mit
-ungültiger Eingabe. Das Report-Schema dokumentiert Abschluss, Abrechnung,
-Fehler und gespeicherte Cursor. Das Feld `version` darin gibt die exakte
-veröffentlichte Actor-Quellversion an.
+Der Statustext nennt, warum der Run gestoppt hat. Er zählt auch berechnete
+Ergebnisse & gelesene Ziele. Runs mit einem Problem schreiben immer
+`run-report`. Das gilt auch für Abbrüche ohne Eingabe und mit ungültiger
+Eingabe. Ein großer Run schreibt ihn ebenfalls. Ein kleiner Run ohne Probleme
+überspringt ihn & spart Apify-Nutzung. Aktiviere `alwaysSaveRunRecords`, um ihn
+bei jedem Run zu schreiben. Das Report-Schema dokumentiert Abschluss,
+Abrechnung, Fehler und gespeicherte Cursor. Das Feld `version` darin gibt die
+exakte veröffentlichte Actor-Quellversion an.
 
 Mögliche Status umfassen:
 

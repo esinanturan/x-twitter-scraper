@@ -17,9 +17,9 @@
 
 Xquik ist der schnellste & günstigste X-(Twitter)-Scraper-Dienst der Welt mit
 den umfassendsten X-Daten. X (Twitter) Brand Monitoring verfolgt
-Markenerwähnungen mit Relevanz, Sentiment & Antworten zur Kundenerfahrung. Jeder
-andere Apify Actor berechnet, bevor gefiltert oder dedupliziert wird. Xquik
-berechnet nur für gelieferte, eindeutige, filterkonforme Ergebnisse. Die
+Markenerwähnungen mit Relevanz, Sentiment & Antworten zur Kundenerfahrung. Die
+meisten anderen Apify Actors berechnen, bevor gefiltert oder dedupliziert wird.
+Xquik berechnet nur für gelieferte, eindeutige, filterkonforme Ergebnisse. Die
 KI-Kosten sind im Preis pro Tweet enthalten. Du brauchst kein KI-Konto, keine
 Tokens und keinen Schlüssel.
 
@@ -147,7 +147,7 @@ keine Tokens und keinen Schlüssel.
 
 Ab $0.0003 pro erfolgreich analysiertem Tweet, ohne Startgebühr. Der Preis
 enthält die Erfassung. Das Analyse-Kontingent umfasst 8 Fragen, 8.000 Byte pro
-Frage-Definition & 12.000 Byte Kontext pro Tweet. Extraktionsfilter &
+Frage-Definition & 64.000 Byte Kontext pro Tweet. Extraktionsfilter &
 Deduplizierung laufen vor der Analyse, sodass du nie für herausgefilterte oder
 doppelte Datensätze zahlst. Fehlgeschlagene Analysen, übersprungene Analysen &
 Diagnose-Datensätze verursachen keine Ergebnisgebühr. Apify berechnet die
@@ -331,11 +331,16 @@ hinweg, die du vergleichen willst.
 ### Warum kam ein Datensatz mit `analysis.status` `failed` oder `skipped` zurück?
 
 Der Actor hat den Tweet gesammelt & geliefert, aber die KI-Analyse wurde nicht
-abgeschlossen. `analysis.reason` nennt die Ursache, etwa `context_limit`, wenn
-der Tweet & sein Kontext `maxContextBytes` überschreiten, oder
-`service_unavailable`, wenn der Analysedienst kurz nicht verfügbar ist. Diese
-Datensätze verursachen keine Ergebnisgebühr. Erhöhe `maxContextBytes` (bis zu
-12.000) oder führe die betroffenen IDs erneut aus.
+abgeschlossen. `analysis.reason` nennt die Ursache. `context_limit` bedeutet,
+dass dein Kontext & deine Ziele keinen Platz für den Tweet lassen.
+`service_unavailable` bedeutet, dass der Analysedienst kurz nicht verfügbar war.
+Diese Datensätze verursachen keine Ergebnisgebühr. Kürze `analysis.context` oder
+führe die betroffenen IDs erneut aus.
+
+Der Actor analysiert auch einen Tweet, der länger als `maxContextBytes` ist. Er
+kürzt zuerst zitierte & beantwortete Beiträge, dann den Tweet.
+`analysis.contextAvailability.postText` ist dann `truncated`. Erhöhe
+`maxContextBytes` auf bis zu 64.000, um mehr Text zu behalten.
 
 ### Prüft die Analyse Fakten?
 

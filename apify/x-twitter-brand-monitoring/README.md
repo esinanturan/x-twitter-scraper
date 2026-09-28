@@ -17,8 +17,8 @@
 
 Xquik is the world's fastest & cheapest X (Twitter) scraper service with the
 most complete X data. X (Twitter) Brand Monitoring tracks your brand mentions
-with relevance, sentiment & customer-experience answers. Every other Apify Actor
-charges before filtering or deduplicating. Xquik charges only for delivered,
+with relevance, sentiment & customer-experience answers. Most other Apify Actors
+charge before filtering or deduplicating. Xquik charges only for delivered,
 unique, filter-matching results. AI costs are included in the per-tweet price.
 You need no AI account, tokens or key.
 
@@ -137,7 +137,7 @@ key.
 
 From $0.0003 per successfully analyzed tweet, with no start fee. The price
 includes collection. The analysis allowance is 8 questions, 8,000 bytes per
-question definition & 12,000 bytes of context per tweet. Extraction filters &
+question definition & 64,000 bytes of context per tweet. Extraction filters &
 deduplication run before analysis, so you never pay for filtered-out or
 duplicate rows. Failed analyses, skipped analyses & diagnostic rows have no
 result charge. Apify bills platform usage for compute, storage & transfer
@@ -305,10 +305,14 @@ want to compare.
 ### Why did a row come back with `analysis.status` of `failed` or `skipped`?
 
 The Actor collected & delivered the tweet, but the AI analysis did not complete.
-`analysis.reason` names the cause, such as `context_limit` when the tweet & its
-context exceed `maxContextBytes`, or `service_unavailable` when the analysis
-service is briefly unavailable. These rows carry no result charge. Raise
-`maxContextBytes` (up to 12,000) or rerun the affected IDs.
+`analysis.reason` names the cause. `context_limit` means your context & targets
+leave no room for the tweet. `service_unavailable` means the analysis service
+was briefly unavailable. These rows carry no result charge. Shorten
+`analysis.context` or rerun the affected IDs.
+
+The Actor still analyzes a tweet longer than `maxContextBytes`. It cuts quoted &
+replied-to posts first, then the tweet. `analysis.contextAvailability.postText`
+is then `truncated`. Raise `maxContextBytes` up to 64,000 to keep more text.
 
 ### Does the analysis verify facts?
 

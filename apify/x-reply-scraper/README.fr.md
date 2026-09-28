@@ -15,11 +15,11 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">Découvrez comment Framer utilise les scrapers Xquik avec Claude Code, Codex, Cursor et d'autres outils, à partir de 6:07.</a>
 </td></tr></table>
 
-Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher
-au monde, avec les données X les plus complètes. X Reply Scraper collecte
-les réponses, commentaires et conversations entières. Tous les autres
-Actors Apify facturent avant de filtrer ou de dédupliquer. Xquik ne facture
-que les résultats livrés, uniques et conformes aux filtres.
+Xquik est le service de scraping X (Twitter) le plus rapide et le moins cher au
+monde, avec les données X les plus complètes. X Reply Scraper collecte les
+réponses, commentaires et conversations entières. La plupart des autres Actors
+Apify facturent avant de filtrer ou de dédupliquer. Xquik ne facture que les
+résultats livrés, uniques et conformes aux filtres.
 
 Scrapez les réponses X (Twitter) pour **$0.00015 par ligne livrée sur
 chaque plan Apify**. Collez des URL de post, des ID de Tweet, des URL de
@@ -40,11 +40,14 @@ résultats disponibles restent intacts. Consultez `availableResults`,
 `failedTargets`, `retryable` et `nextAction` avant de relancer. Une sortie
 d'Actor réussie confirme la livraison, pas l'extraction complète.
 
-Le texte de statut nomme chaque cause d'un arrêt anticipé. `stopCauses`
-liste chaque cause avec ses propres `message`, `retryable` et `nextAction`.
-Les causes sont `target_failed`, `page_limit`, `reply_reach` et
-`deadline_reached`. `reply_reach` signifie que X n'a fourni qu'une partie
-d'un thread. Le run est `retryable` dès qu'une cause l'est.
+Le texte de statut nomme chaque cause d'un arrêt anticipé. `stopCauses` liste
+chaque cause avec ses propres `message`, `retryable` et `nextAction`. Les causes
+sont `target_not_found`, `target_failed`, `page_limit`, `reply_reach` et
+`deadline_reached`. `reply_reach` signifie que X n'a fourni qu'une partie d'un
+thread. Un post ou un compte introuvable n'est pas un échec. Le texte de statut
+le nomme, par exemple « X has no match for 1 target. » Il ne rejoint
+`stopCauses` que si une autre cause a arrêté le run. Le run est `retryable` dès
+qu'une cause l'est.
 
 ## Que fait ce scraper de réponses Twitter ?
 
@@ -440,10 +443,14 @@ Les lignes de donnée réussies utilisent `resultType: "reply"`. Les sorties
 sans donnée écrivent exactement 1 enregistrement gratuit dans
 `diagnostics` avec une correction exploitable.
 
-Chaque issue de run écrit `run-report`, y compris les sorties sans entrée
-et avec entrée invalide. Le schéma du rapport documente l'achèvement, la
-facturation, les échecs et les curseurs sauvegardés. Son champ `version`
-indique la version exacte du code source publié de l'Actor.
+Le texte de statut indique pourquoi le run s'est arrêté. Il compte aussi les
+résultats facturés et les cibles lues. Les runs avec un problème écrivent
+toujours `run-report`. Cela inclut les sorties sans entrée et avec entrée
+invalide. Un gros run l'écrit aussi. Un petit run sans problème l'omet et
+économise de l'usage Apify. Activez `alwaysSaveRunRecords` pour l'écrire à
+chaque run. Le schéma du rapport documente l'achèvement, la facturation, les
+échecs et les curseurs sauvegardés. Son champ `version` indique la version
+exacte du code source publié de l'Actor.
 
 Les statuts possibles incluent :
 

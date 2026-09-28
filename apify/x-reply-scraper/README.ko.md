@@ -17,7 +17,7 @@
 
 Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르고 저렴한 X(Twitter)
 스크레이퍼 서비스입니다. X Reply Scraper는 답글, 댓글 & 전체 대화를 수집합니다.
-다른 모든 Apify Actor는 필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은
+다른 Apify Actor 대부분은 필터링이나 중복 제거 전에 요금을 부과합니다. Xquik은
 전달되고, 고유하며, 필터에 맞는 결과에만 요금을 부과합니다.
 
 **모든 Apify 요금제에서 전달된 행당 $0.00015**로 X(Twitter) 답글을 스크랩하세요.
@@ -39,9 +39,12 @@ Xquik은 가장 완전한 X 데이터를 보유한, 세계에서 가장 빠르�
 
 상태 메시지는 실행이 일찍 멈춘 원인을 모두 표시합니다. `stopCauses`는 각 원인을
 나열하고, 원인마다 `message`, `retryable` & `nextAction`을 따로 담습니다. 원인은
-`target_failed`, `page_limit`, `reply_reach` & `deadline_reached`입니다.
-`reply_reach`는 X가 스레드의 일부만 제공했다는 뜻입니다. 원인 중 하나라도
-`retryable`이면 실행도 `retryable`입니다.
+`target_not_found`, `target_failed`, `page_limit`, `reply_reach` &
+`deadline_reached`입니다. `reply_reach`는 X가 스레드의 일부만 제공했다는
+뜻입니다. 게시물이나 계정이 없는 것은 실패가 아닙니다. 상태 메시지는 이를
+"X has no match for 1 target."처럼 알려 줍니다. 이 원인은 다른 원인으로 실행이
+멈춘 경우에만 `stopCauses`에 포함됩니다. 원인 중 하나라도 `retryable`이면 실행도
+`retryable`입니다.
 
 ## 이 Twitter 답글 스크레이퍼는 무엇을 하나요?
 
@@ -390,9 +393,13 @@ Actor는 충돌하는 소스 키를 덮어쓰지 않습니다.
 실행 가능한 수정 방법과 함께 `diagnostics`에 정확히 무료 레코드 1건을
 작성합니다.
 
-입력이 없거나 잘못된 입력으로 종료된 경우를 포함해 모든 결과가 `run-report`를
-작성합니다. 보고서 스키마는 완료, 과금, 실패, 저장된 커서를 문서화합니다.
-`version` 필드는 게시된 정확한 Actor 소스 버전을 보고합니다.
+상태 메시지는 실행이 멈춘 이유를 알려 줍니다. 과금된 결과와 읽은 대상 수도 함께
+표시합니다. 문제가 생긴 실행은 입력이 없거나 잘못된 입력으로 종료된 경우를
+포함해 항상 `run-report`를 작성합니다. 큰 실행도 이 레코드를 작성합니다.
+문제없이 끝난 작은 실행은 이 레코드를 건너뛰어 Apify 사용량을 아낍니다. 모든
+실행에서 작성하려면 `alwaysSaveRunRecords`를 켜세요. 보고서 스키마는 완료, 과금,
+실패, 저장된 커서를 문서화합니다. `version` 필드는 게시된 정확한 Actor 소스
+버전을 보고합니다.
 
 가능한 상태에는 다음이 포함됩니다.
 

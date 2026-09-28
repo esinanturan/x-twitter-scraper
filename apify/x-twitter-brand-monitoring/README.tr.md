@@ -17,11 +17,11 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X (Twitter) Brand Monitoring, marka bahsedilmelerini ilgi,
-duygu durumu ve müşteri deneyimi yanıtlarıyla izler. Diğer tüm Apify Actor'ları
-filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim edilen,
-benzersiz, filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ maliyetleri
-tweet başına fiyata dahil. Yapay zekâ hesabına, token'a veya anahtara ihtiyacın
-yok.
+duygu durumu ve müşteri deneyimi yanıtlarıyla izler. Diğer Apify Actor'larının
+çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır. Yapay zekâ
+maliyetleri tweet başına fiyata dahil. Yapay zekâ hesabına, token'a veya
+anahtara ihtiyacın yok.
 
 X (Twitter)'da marka bahsedilmelerini izle ve çalıştırmalar arasındaki duygu
 durumu değişikliklerini takip et. **X (Twitter) Brand Monitoring with AI
@@ -56,8 +56,8 @@ bilgilendir. Müşterilerin senin hakkında nasıl konuştuğunun geçmişini
 4. Actor'ı çalıştır, ardından sonraki karşılaştırman için veri kümesi
    ID'sini sakla.
 5. Bir sonraki çalıştırmada, `monitor.baselineDatasetId`'yi o ID ile ekle.
-   Yanıtların karşılaştırılabilir kalması için soruları, hedefleri, bağlamı
-   ve bağlam sınırlarını değiştirmeden tut.
+   Yanıtların karşılaştırılabilir kalması için soruları, hedefleri, bağlamı ve
+   bağlam sınırlarını değiştirmeden tut.
 
 ```json
 {
@@ -145,7 +145,7 @@ veya anahtara ihtiyacın yok.
 
 Başlangıç ücreti olmadan, başarıyla analiz edilen tweet başına $0.0003'ten
 başlar. Fiyat toplamayı içerir. Analiz ödeneği 8 soru, soru tanımı başına 8.000
-bayt & tweet başına 12.000 bayt bağlamdır. Çıkarma filtreleri & tekilleştirme
+bayt & tweet başına 64.000 bayt bağlamdır. Çıkarma filtreleri & tekilleştirme
 analizden önce çalışır, bu yüzden filtrelenmiş veya tekrarlanan satırlar için
 asla ödemezsin. Başarısız analizlerin, atlanan analizlerin & tanılama
 satırlarının sonuç ücreti yoktur. Apify, işlem, depolama & aktarım için platform
@@ -327,11 +327,15 @@ eder. Score soruları en az 2 sıralı seviye kullanır. Karşılaştırmak iste
 ### Bir satır neden `analysis.status`'u `failed` veya `skipped` olarak döndü?
 
 Actor tweet'i topladı & teslim etti, ancak yapay zeka analizi tamamlanmadı.
-`analysis.reason`, tweet ve bağlamı `maxContextBytes`'ı aştığında
-`context_limit` veya analiz hizmeti kısa süre kullanılamadığında
-`service_unavailable` gibi nedeni adlandırır. Bu satırların sonuç ücreti yoktur.
-`maxContextBytes`'ı (12.000'e kadar) artır veya etkilenen ID'leri yeniden
-çalıştır.
+`analysis.reason` nedeni adlandırır. `context_limit`, bağlamının ve hedeflerinin
+tweet'e yer bırakmadığı anlamına gelir. `service_unavailable`, analiz hizmetinin
+kısa süre kullanılamadığı anlamına gelir. Bu satırların sonuç ücreti yoktur.
+`analysis.context` alanını kısalt veya etkilenen ID'leri yeniden çalıştır.
+
+Actor, `maxContextBytes` sınırından uzun bir tweet'i yine de analiz eder. Önce
+alıntılanan ve yanıtlanan gönderileri, sonra tweet'i kısaltır. Bu durumda
+`analysis.contextAvailability.postText` değeri `truncated` olur. Daha fazla
+metin tutmak için `maxContextBytes` değerini 64.000'e kadar artır.
 
 ### Analiz gerçekleri doğrular mı?
 

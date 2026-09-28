@@ -17,9 +17,9 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Reply Scraper, yanıtları, yorumları ve tüm konuşmaları
-toplar. Diğer tüm Apify Actor'ları filtreleme veya tekilleştirmeden önce
-ücret alır. Xquik yalnızca teslim edilen, benzersiz, filtreyle eşleşen
-sonuçlar için ücret alır.
+toplar. Diğer Apify Actor'larının çoğu filtreleme veya tekilleştirmeden önce
+ücret alır. Xquik yalnızca teslim edilen, benzersiz, filtreyle eşleşen sonuçlar
+için ücret alır.
 
 X (Twitter) yanıtlarını **her Apify planında teslim edilen satır başına
 $0.00015'e** kazı. Gönderi URL'lerini, Tweet ID'lerini, profil URL'lerini
@@ -40,12 +40,14 @@ sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
 `failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
 
-Durum metni, çalıştırmayı erken durduran her nedeni belirtir. `stopCauses`,
-her nedeni kendi `message`, `retryable` ve `nextAction` alanlarıyla
-listeler. Olası nedenler şunlar: `target_failed`, `page_limit`,
-`reply_reach` ve `deadline_reached`. `reply_reach`, X'in thread'in sadece
-bir kısmını verdiğini gösterir. Nedenlerden en az biri `retryable` ise
-çalıştırma da `retryable` olur.
+Durum metni, çalıştırmayı erken durduran her nedeni belirtir. `stopCauses`, her
+nedeni kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Olası
+nedenler şunlar: `target_not_found`, `target_failed`, `page_limit`,
+`reply_reach` ve `deadline_reached`. `reply_reach`, X'in thread'in sadece bir
+kısmını verdiğini gösterir. Bulunamayan bir gönderi veya hesap hata sayılmaz.
+Durum metni bunu belirtir, örneğin "X has no match for 1 target." Bu durum,
+yalnızca çalıştırmayı başka bir neden durdurduysa `stopCauses` içine girer.
+Nedenlerden en az biri `retryable` ise çalıştırma da `retryable` olur.
 
 ## Bu Twitter yanıt scraper'ı ne yapar?
 
@@ -419,8 +421,12 @@ Başarılı veri satırları `resultType: "reply"` kullanır. Veri dışı çık
 uygulanabilir bir düzeltmeyle `diagnostics`'e tam olarak 1 ücretsiz kayıt
 yazar.
 
-Girdisiz ve geçersiz girdi çıkışları dahil her sonuç `run-report` yazar.
-Rapor şeması tamamlanmayı, faturalamayı, hataları ve kaydedilmiş imleçleri
+Durum metni, çalıştırmanın neden durduğunu söyler. Ücretlendirilen sonuçları ve
+okunan hedefleri de sayar. Sorunlu çalıştırmalar, girdisiz ve geçersiz girdi
+çıkışları dahil her zaman `run-report` yazar. Büyük bir çalıştırma da bu kaydı
+yazar. Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç. Rapor şeması tamamlanmayı, faturalamayı, hataları ve kaydedilmiş imleçleri
 belgeler. `version` alanı yayınlanmış tam Actor kaynak sürümünü bildirir.
 
 Olası durumlar arasında şunlar bulunur:

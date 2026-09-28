@@ -16,8 +16,8 @@
 </td></tr></table>
 
 Xquik 是全球最快、最便宜的 X（Twitter）抓取工具服务，拥有最完整的 X 数据。X User
-Search Scraper 能按用户名、简介与地点查找用户。其他所有 Apify Actor 都会在过滤
-或去重之前就收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
+Search Scraper 能按用户名、简介与地点查找用户。大多数其他 Apify Actor
+都会在过滤或去重之前收费。Xquik 只为已交付、唯一且符合过滤条件的结果收费。
 
 按姓名、话题、简介或地点搜索 Twitter 账号。无需 X API 密钥。
 
@@ -33,6 +33,9 @@ Search Scraper 能按用户名、简介与地点查找用户。其他所有 Apif
   "maxItems": 10000
 }
 ```
+
+顺利完成的小型运行会跳过 `run-report`，以节省 Apify 用量。开启
+`alwaysSaveRunRecords` 可在每次运行时都写入。
 
 ## 输出
 

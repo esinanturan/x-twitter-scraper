@@ -17,8 +17,8 @@
 
 Xquik, en eksiksiz X verisine sahip, dünyanın en hızlı ve en ucuz X (Twitter)
 scraper hizmetidir. X Follower Scraper, takipçileri, takip edilenleri, liste
-üyelerini, aboneleri ve topluluk üyelerini toplar. Diğer tüm Apify Actor'ları
-filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
+üyelerini, aboneleri ve topluluk üyelerini toplar. Diğer Apify Actor'larının
+çoğu filtreleme veya tekilleştirmeden önce ücret alır. Xquik yalnızca teslim
 edilen, benzersiz, filtreyle eşleşen sonuçlar için ücret alır.
 
 X (Twitter) takipçilerini, takip edilenleri, doğrulanmış takipçileri, Liste
@@ -37,6 +37,12 @@ sonuçlar bozulmadan kalır. Yeniden denemeden önce `availableResults`,
 `failedTargets`, `retryable` ve `nextAction` alanlarını oku. Başarılı bir Actor
 çıkışı teslimatı doğrular, eksiksiz çıkarmayı değil.
 
+Durum metni, erken durmanın her nedenini belirtir. `stopCauses`, her nedeni
+kendi `message`, `retryable` ve `nextAction` alanlarıyla listeler. Olası
+nedenler şunlar: `target_not_found`, `target_failed` ve `deadline_reached`.
+Bulunamayan bir hesap, listeye yalnızca çalıştırmayı başka bir neden durdurduysa
+girer. Nedenlerden en az biri `retryable` ise çalıştırma da `retryable` olur.
+
 ## X Follower Scraper ne yapar?
 
 X Follower Scraper, takipçiler, takip edilenler, Listeler ve Topluluklar için
@@ -46,6 +52,8 @@ ilişkisini içerir.
 ### Temel davranış
 
 - Filtreler ve tekrar kaldırma faturalamadan önce çalışır.
+- Birden fazla hedefte çıkan bir profil varsayılan olarak bir kez görünür ve
+  ücretlendirilir.
 - Bir çalıştırma handle'ları, sayısal ID'leri, URL'leri ve kısa yolları kabul
   eder.
 - Birleştirme modu paylaşılan profilleri, kaynakları, ilişkileri ve
@@ -125,12 +133,16 @@ DM, bildirim ve benzeri görüntüleyen bayrakları her zaman kaldırılır, ham
 
 Her Apify planında teslim edilen profil başına `$0.00015` ücret alınır. Apify,
 platform kullanımını ayrıca faturalandırır. Xquik, teslim edilen veri satırı
-başına bir ücret uygular. Tanılamalar `diagnostics` çıktısında ücretsizdir.
-Ayrı bir Xquik aboneliği gerekmez. Başlangıç ücreti uygulanmaz. Her
-çalıştırma, Apify'ın Actor'a gösterdiği canlı olay başına ödeme fiyatından
-hesaplanan `estimatedChargeUsd` ile bir `run-report` kaydı yazar. Girdisiz ve
-geçersiz girdi çıkışları dahil her sonuç `run-report` yazar. `version` alanı
-yayınlanmış tam Actor kaynak sürümünü bildirir.
+başına bir ücret uygular. Tanılamalar `diagnostics` çıktısında ücretsizdir. Ayrı
+bir Xquik aboneliği gerekmez. Başlangıç ücreti uygulanmaz. Durum metni,
+çalıştırmanın neden durduğunu söyler. Ücretlendirilen sonuçları, atlanan
+tekrarları ve okunan hedefleri de sayar. Sorun yaşayan veya büyük bir çalıştırma
+ayrıca bir `run-report` kaydı yazar. Kaydın `estimatedChargeUsd` alanı, Apify'ın
+Actor'a gösterdiği canlı olay başına ödeme fiyatını kullanır. Sorunlu
+çalıştırmalar, girdisiz ve geçersiz girdi çıkışları dahil her zaman `run-report`
+yazar. Sorunsuz biten küçük bir çalıştırma bu kaydı atlar ve Apify kullanımından
+tasarruf eder. Her çalıştırmada yazması için `alwaysSaveRunRecords` seçeneğini
+aç. `version` alanı yayınlanmış tam Actor kaynak sürümünü bildirir.
 
 `failedTargets`, bir hatadan sonra duran hedefleri sayar. Teslim edilen
 profiller faturalanabilir veri satırları olarak kalır. Bu çalıştırmalar
@@ -151,7 +163,8 @@ bilgisi ve faturalama hepsinde doğru kalır.
   `locationContains`, `minFollowing`, `maxFollowing`, `minStatuses`,
   `maxStatuses`, `minAccountAgeDays`, `verifiedType`, `usernameContains`,
   `hasWebsite`, `hasLocation`), bir profil veri kümene girmeden önce çalışır.
-- `dedupeAcrossTargets: true` ile Actor tekrarları yazmadan önce kaldırır.
+- Actor, hedefler arasındaki tekrarları yazmadan önce kaldırır. Onları tutmak
+  için `dedupeAcrossTargets: false` ayarla.
 - Veri kümesi tarafından reddedilen satırlar faturalandırılmaz.
 - Girdisiz, geçersiz girdi ve sıfır çıktılı çalıştırmalar, ücretsiz
   `diagnostics` çıktısına 1 uygulanabilir kayıt yazar.
@@ -318,9 +331,10 @@ tüm alanlar isteğe bağlıdır: `startUrls`, `twitterHandles`, `userIds`,
 - Doğrulanmış profiller için Start URLs'e
   `https://x.com/<handle>/verified_followers` yapıştır.
 - Üyelerini denetlemek için Start URLs'e bir liste URL'si yapıştır.
-- 2 veya daha fazla handle ekle. Yalnızca ilk eşleşen profil satırını tutmak
-  için `dedupeMode: "first"` ayarla, ya da tüm eşleşen kaynak hedeflerle tek
-  bir satır tutmak için `dedupeMode: "merge"` kullan.
+- 2 veya daha fazla handle ekle. Paylaşılan bir profil, ilk hedefin altında bir
+  kez görünür. Her eşleşen hedefi içeren 1 satır tutmak için
+  `dedupeMode: "merge"` kullan. Hedef başına 1 satır tutmak için
+  `dedupeAcrossTargets: false` ayarla.
 
 ### Console ve API girdi deneyimi
 
@@ -334,12 +348,14 @@ Console şu kontrolleri gösterir:
 - Sonuç sınırları 1 veya daha büyük tam sayıları kabul eder.
 - Sayısal profil filtreleri 0 veya daha büyük tam sayıları kabul eder.
 
-Yeni entegrasyonlarda kanonik alanları kullan. Uyumluluk takma adları JSON,
-API, SDK, otomasyon ve görev girdilerinde kullanılabilir kalır. Buna Output
-Mode takma adları olarak `outputVariant` ve `includeRaw` da dahildir. Ayrıca
-bir Dedupe Mode takma adı olarak `dedupeAcrossTargets`'i de içerir. Görsel
-form, kanonik bir kontrolü tekrarlayan takma adları gizler. Mevcut JSON ve
-kaydedilmiş görev girdileri güncel davranışlarını korur.
+Yeni entegrasyonlarda kanonik alanları kullan. Uyumluluk takma adları JSON, API,
+SDK, otomasyon ve görev girdilerinde kullanılabilir kalır. Buna Output Mode
+takma adları olarak `outputVariant` ve `includeRaw` da dahildir. Ayrıca bir
+Dedupe Mode takma adı olarak `dedupeAcrossTargets`'i de içerir. Görsel form,
+kanonik bir kontrolü tekrarlayan takma adları gizler. Mevcut JSON ve kaydedilmiş
+görev girdilerindeki takma adlar çalışmaya devam eder.
+`dedupeAcrossTargets: false` veya `dedupeMode: "none"` içeren kaydedilmiş
+girdiler hedef başına 1 satır tutar.
 
 ### Başka bir takipçi Actor'ından geç
 
@@ -442,8 +458,9 @@ Apify veri kümesinden JSON, CSV, Excel veya HTML olarak dışa aktar.
   `verifiedOnly`, `verifiedType`, `minStatuses`, `usernameContains`,
   `bioContains`, `locationContains`, `hasWebsite` ve `hasLocation`'ı
   birleştir.
-- Tüm hedefler genelinde yalnızca benzersiz profiller elde etmek için birden
-  fazla rakip handle kazırken `dedupeMode: "first"` ayarla.
+- Çalıştırmalar varsayılan olarak hedefler genelinde yalnızca benzersiz
+  profilleri tutar. Hedef başına 1 satır tutmak için
+  `dedupeAcrossTargets: false` ayarla.
 - Her eşleşen kaynak hedefin eklendiği profil başına tek satır elde etmek
   için `dedupeMode: "merge"` ayarla.
 - Mevcut olduğunda sabitlenmiş tweet ID'leri, varlıklar ve profil metadata'sı

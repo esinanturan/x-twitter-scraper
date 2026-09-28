@@ -15,8 +15,8 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何将 Xquik 抓取工具与 Claude Code、Codex、Cursor 等结合使用，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，提供最完整的 X
-数据。X Reply Scraper 用于收集回复、评论及完整对话。其他所有 Apify Actor
+Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，提供最完整的 X 数据。X
+Reply Scraper 用于收集回复、评论及完整对话。大多数其他 Apify Actor
 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。
 
 在所有 Apify 套餐上，抓取 X（Twitter）回复的价格为**每条已交付行 $0.00015**。
@@ -35,9 +35,12 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，提�
 `nextAction`。Actor 成功退出只能确认交付情况，不代表抓取已完成。
 
 状态消息会写明运行提前停止的每个原因。`stopCauses` 会列出每个原因及其各自的
-`message`、`retryable` 和 `nextAction`。原因的取值为 `target_failed`、
-`page_limit`、`reply_reach` 和 `deadline_reached`。`reply_reach` 表示 X
-只提供了推文串的一部分。只要任一原因可重试，整个运行就会标记为 `retryable`。
+`message`、`retryable` 和 `nextAction`。原因的取值为 `target_not_found`、
+`target_failed`、`page_limit`、`reply_reach` 和 `deadline_reached`。
+`reply_reach` 表示 X 只提供了推文串的一部分。帖子或账号不存在不算失败。
+状态消息会写明这一点，例如 "X has no match for 1 target." 只有当其他原因
+使运行停止时，它才会加入 `stopCauses`。只要任一原因可重试，整个运行就会
+标记为 `retryable`。
 
 ## 这个 Twitter 回复抓取工具能做什么？
 
@@ -377,9 +380,12 @@ OpenAPI 文档。
 成功的数据行使用 `resultType: "reply"`。非数据类退出会向 `diagnostics`
 写入恰好 1 条免费记录，并附带可操作的修复建议。
 
-每种结果都会写入 `run-report`，包括无输入和输入无效的退出情况。该报告的
-模式记录了完成情况、计费、失败及已保存的游标。其 `version` 字段记录
-确切的已发布 Actor 源代码版本。
+状态消息会说明运行停止的原因。它还会统计已收费的结果和已读取的目标。
+遇到问题的运行总会写入 `run-report`，包括无输入和输入无效的退出情况。
+大型运行也会写入。顺利完成的小型运行会跳过该记录，以节省 Apify 用量。
+开启 `alwaysSaveRunRecords` 可在每次运行时都写入。该报告的模式记录了
+完成情况、计费、失败及已保存的游标。其 `version` 字段记录确切的已发布
+Actor 源代码版本。
 
 可能出现的状态包括：
 

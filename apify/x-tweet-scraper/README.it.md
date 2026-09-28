@@ -167,12 +167,16 @@ Ogni piano Apify costa `$0.00015` per riga consegnata. Apify fattura l'uso
 della tua piattaforma separatamente. Xquik applica un addebito per ogni riga
 di dati consegnata. La diagnostica è gratuita nell'output `diagnostics`.
 
-Non si applica alcun abbonamento Xquik. Non si applica alcun costo di avvio o
-di query separato. Ogni esecuzione scrive anche un record `run-report` con
-`estimatedChargeUsd` calcolato dal prezzo pay-per-event live che Apify espone
-all'Actor. Ogni esito scrive `run-report`, incluse le uscite senza input e con
-input non valido. I run report separano le righe di dati in `realRows` e la
-diagnostica in `diagnosticRows`.
+Non si applica alcun abbonamento Xquik. Non si applica alcun costo di avvio o di
+query separato. Il messaggio di stato indica perché l'esecuzione si è fermata.
+Conta anche i risultati addebitati & i target letti. Un'esecuzione con un
+problema, o un'esecuzione grande, scrive anche un record `run-report`. Il suo
+`estimatedChargeUsd` usa il prezzo pay-per-event in tempo reale che Apify espone
+all'Actor. Le esecuzioni con un problema scrivono sempre `run-report`. Vale
+anche per le uscite senza input o con input non valido. Un'esecuzione piccola
+senza problemi lo salta & risparmia uso di Apify. Attiva `alwaysSaveRunRecords`
+per scriverlo a ogni esecuzione. I run report separano le righe di dati in
+`realRows` e la diagnostica in `diagnosticRows`.
 
 Capisci i risultati vuoti prima di spendere per un'altra esecuzione. L'oggetto
 `filtering` nei report e nella diagnostica finale conta le righe rimosse dai
@@ -202,22 +206,29 @@ sono `target_not_found`, `target_protected`, `search_unavailable`,
 `likes_hidden`, `target_failed`, `pagination_safety_limit`, `reply_reach` &
 `deadline_reached`. L'esecuzione è `retryable` quando lo è almeno una causa.
 
-I target protetti o mancanti contano come errori, anche in esecuzioni con
-risultati validi. Conta anche una ricerca che X non può eseguire. X.com mostra
-"Something went wrong" per una ricerca simile. L'esecuzione la ferma subito,
-senza retry. Contano anche i Mi piace che X nasconde. X mostra chi ha messo Mi
-piace a un post solo al suo autore. E mostra solo a un account i post a cui ha
-messo Mi piace. Quando tutti gli errori riguardano target non disponibili, la
-diagnostica imposta `retryable: false`. Controlla gli URL o gli username target
-& scegli account pubblici disponibili. Restringi una ricerca che X non può
-eseguire o cambiane i filtri. Al posto dei Mi piace nascosti, leggi retweeter,
-risposte o post. Gli altri errori conservano le indicazioni per il retry per i
-target non completati.
+Un target mancante o protetto non è un errore. X non ha nulla da leggere lì.
+Quindi l'esecuzione legge fino in fondo tutti gli altri target. Riporta
+`outcome: "complete"`. Il motivo di completamento viene dai target letti, come
+`source_exhausted`. `failedSubtargets` esclude questi target. Il messaggio di
+stato & una diagnostica `complete` gratuita li contano. Un'esecuzione senza
+altre righe scrive invece una diagnostica `zero-output`.
+
+Una ricerca che X non può eseguire conta come errore. X.com mostra "Something
+went wrong" per una ricerca simile. L'esecuzione la ferma subito, senza retry.
+Contano anche i Mi piace che X nasconde. X mostra chi ha messo Mi piace a un
+post solo al suo autore. E mostra solo a un account i post a cui ha messo Mi
+piace. Quando tutti gli errori riguardano target non disponibili, la diagnostica
+imposta `retryable: false`. Controlla gli URL o gli username target & scegli
+account pubblici disponibili. Restringi una ricerca che X non può eseguire o
+cambiane i filtri. Al posto dei Mi piace nascosti, leggi retweeter, risposte o
+post. Gli altri errori conservano le indicazioni per il retry per i target non
+completati.
 
 La diagnostica nomina questi target in `unavailableTargets`. Ogni voce ha il
-`target` come lo hai inserito & un `reason`: `not_found`, `protected`,
-`search_unavailable` o `likes_hidden`. La lista contiene fino a 100 voci.
-Rimuovili dall'input per ottenere un'esecuzione completa.
+`target` come lo hai inserito, un `reason` & un `nextAction`. Il motivo è
+`not_found`, `protected`, `search_unavailable` o `likes_hidden`. Una voce di
+ricerca può avere anche un `fix`, come l'operatore da rimuovere. La lista
+contiene fino a 100 voci. Rimuovili dall'input.
 
 `completionReason: "pagination_safety_limit"` non è un errore di lettura.
 L'esecuzione ha mantenuto le righe valide, poi ha chiuso un target che non
@@ -656,6 +667,11 @@ l'output Legacy. Il form visivo li etichetta come alias Legacy.
 | `filter:replies`       | `filter:replies`        | Solo tweet di risposta               |
 | `filter:quote`         | `filter:quote`          | Solo citazioni                       |
 | `filter:blue_verified` | `filter:blue_verified`  | Solo utenti Premium                  |
+
+X non cerca più con `filter:vine`, `filter:consumer_video`, `filter:pro_video`,
+`filter:news` o `retweets_of:`. Una ricerca con uno di questi termina subito.
+Scrive una diagnostica gratuita che indica la correzione. Tieni ogni query entro
+512 caratteri, il massimo che X cerca.
 
 Le finestre di date usano un limite inferiore incluso e un limite superiore
 escluso. L'Actor verifica entrambi i limiti prima di aggiungere o addebitare

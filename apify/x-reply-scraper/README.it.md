@@ -17,9 +17,9 @@
 
 Xquik è lo scraper X (Twitter) più veloce ed economico al mondo, con i dati X
 più completi. X Reply Scraper raccoglie risposte, commenti e intere
-conversazioni. Ogni altro Actor Apify addebita un costo prima di filtrare o
-deduplicare. Xquik addebita solo i risultati consegnati, unici e conformi ai
-filtri.
+conversazioni. La maggior parte degli altri Actor Apify addebita costi prima di
+filtrare o deduplicare. Xquik addebita solo i risultati consegnati, unici e
+conformi ai filtri.
 
 Estrai risposte X (Twitter) a **$0.00015 per riga consegnata su ogni piano
 Apify**. Incolla URL di post, ID dei tweet, URL di profilo o username.
@@ -42,9 +42,12 @@ riuscita dell'Actor conferma la consegna, non l'estrazione completa.
 
 Il messaggio di stato nomina ogni causa di un'interruzione anticipata.
 `stopCauses` elenca ogni causa con i propri `message`, `retryable` &
-`nextAction`. Le cause sono `target_failed`, `page_limit`, `reply_reach` &
-`deadline_reached`. `reply_reach` significa che X ha fornito solo una parte
-di un thread. L'esecuzione è `retryable` quando lo è almeno una causa.
+`nextAction`. Le cause sono `target_not_found`, `target_failed`, `page_limit`,
+`reply_reach` & `deadline_reached`. `reply_reach` significa che X ha fornito
+solo una parte di un thread. Un post o un account mancante non conta come
+errore. Il messaggio di stato lo indica, ad esempio "X has no match for 1
+target." Compare in `stopCauses` solo quando un'altra causa ha fermato
+l'esecuzione. L'esecuzione è `retryable` quando lo è almeno una causa.
 
 ## Cosa fa questo scraper di risposte Twitter?
 
@@ -434,10 +437,14 @@ Le righe di dati riuscite usano `resultType: "reply"`. Le uscite senza dati
 scrivono esattamente 1 record gratuito in `diagnostics` con una correzione
 attuabile.
 
-Ogni esito scrive `run-report`, incluse le uscite senza input e con input
-non valido. Lo schema del report documenta completamento, fatturazione,
-errori e cursori salvati. Il suo campo `version` riporta la versione esatta
-della fonte pubblicata dell'Actor.
+Il messaggio di stato indica perché l'esecuzione si è fermata. Conta anche i
+risultati addebitati & i target letti. Le esecuzioni con un problema scrivono
+sempre `run-report`. Vale anche per le uscite senza input o con input non
+valido. Anche un'esecuzione grande lo scrive. Un'esecuzione piccola senza
+problemi lo salta & risparmia uso di Apify. Attiva `alwaysSaveRunRecords` per
+scriverlo a ogni esecuzione. Lo schema del report documenta completamento,
+fatturazione, errori e cursori salvati. Il suo campo `version` riporta la
+versione esatta della fonte pubblicata dell'Actor.
 
 I possibili stati includono:
 

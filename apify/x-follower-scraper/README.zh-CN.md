@@ -15,7 +15,7 @@
 <a href="https://youtu.be/4UOSpoOoC3Y?t=367">观看 Framer 如何在 Claude Code、Codex、Cursor 等工具中使用 Xquik 抓取工具，从 6:07 开始。</a>
 </td></tr></table>
 
-Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X Follower Scraper 可收集关注者、关注对象、列表成员、订阅者与社群成员。其他所有 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。
+Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥有最完整的 X 数据。X Follower Scraper 可收集关注者、关注对象、列表成员、订阅者与社群成员。大多数其他 Apify Actor 都会在过滤或去重之前收费。Xquik 只对已交付、唯一且符合过滤条件的结果收费。
 
 在每个 Apify 套餐上，以**每个交付的主页低至 $0.00015** 的价格抓取 X（Twitter）关注者、关注对象、已验证关注者、List 成员、List 订阅者和 Community 成员。Apify 会单独收取平台使用费。无需 X 登录、无启动费、无查询费。
 
@@ -26,6 +26,8 @@ Xquik 是全球速度最快、成本最低的 X（Twitter）抓取服务，拥�
 
 被中断的提取会写入一份免费的 `partial` 诊断记录。已获取的结果保持完整。重试前请先读取 `availableResults`、`failedTargets`、`retryable` 和 `nextAction`。Actor 成功退出只表示已交付，不代表提取已完成。
 
+状态消息会写明提前停止的每个原因。`stopCauses` 会列出每个原因及其各自的 `message`、`retryable` 和 `nextAction`。原因的取值为 `target_not_found`、`target_failed` 和 `deadline_reached`。只有当其他原因使运行停止时，不存在的账户才会列入其中。只要任一原因可重试，整个运行就会标记为 `retryable`。
+
 ## X Follower Scraper 能做什么？
 
 X Follower Scraper 返回关注者、关注对象、Lists 和 Communities 的可用公开主页数据。每一行都包含其来源目标和关系。
@@ -33,6 +35,7 @@ X Follower Scraper 返回关注者、关注对象、Lists 和 Communities 的可
 ### 核心行为
 
 - 过滤和去重在计费之前执行。
+- 默认情况下，来自多个目标的同一主页只出现并收费一次。
 - 一次运行可接受用户名、数字 ID、URL 和短路径。
 - 合并模式会记录共享主页、来源、关系及 `overlapCount`。
 - 运行日志会在 `fetchDurationMs`、`processingDurationMs`、`pushDurationMs`、`statusDurationMs` 和 `fullPageDurationMs` 中显示每页耗时。
@@ -95,7 +98,7 @@ X Follower Scraper 返回关注者、关注对象、Lists 和 Communities 的可
 
 ## 抓取 X 关注者需要多少费用？
 
-在每个 Apify 套餐上，每个交付的主页收费 `$0.00015`。Apify 会单独收取你的平台使用费。Xquik 对每条交付的数据行收取一次费用。`diagnostics` 输出中的诊断记录是免费的。无需另外订阅 Xquik。无启动费。每次运行都会写入一条 `run-report` 记录，其中的 `estimatedChargeUsd` 是根据 Apify 向 Actor 提供的实时按事件计费价格计算得出的。每种结果都会写入 `run-report`，包括无输入和输入无效的退出情况。其 `version` 字段记录了确切发布的 Actor 源码版本。
+在每个 Apify 套餐上，每个交付的主页收费 `$0.00015`。Apify 会单独收取你的平台使用费。Xquik 对每条交付的数据行收取一次费用。`diagnostics` 输出中的诊断记录是免费的。无需另外订阅 Xquik。无启动费。状态消息会说明运行停止的原因。它还会统计已收费的结果、已跳过的重复项和已读取的目标。遇到问题的运行或大型运行还会写入一条 `run-report` 记录。其中的 `estimatedChargeUsd` 采用 Apify 向 Actor 公开的实时按事件计费价格。遇到问题的运行总会写入 `run-report`，包括无输入和输入无效的退出情况。顺利完成的小型运行会跳过该记录，以节省 Apify 用量。开启 `alwaysSaveRunRecords` 可在每次运行时都写入。其 `version` 字段记录了确切发布的 Actor 源码版本。
 
 `failedTargets` 统计出错后停止的目标数量。已交付的主页仍属于可计费的数据行。这些运行使用 `completionReason: "partial_failure"`。
 
@@ -105,7 +108,7 @@ Apify 默认超时时间为 `0`，运行没有时间限制。Actor 会持续运�
 
 - 启动、目标和关系选择不会额外收取查询费用。
 - 过滤条件（`minFollowers`、`verifiedOnly`、`bioContains`、`locationContains`、`minFollowing`、`maxFollowing`、`minStatuses`、`maxStatuses`、`minAccountAgeDays`、`verifiedType`、`usernameContains`、`hasWebsite`、`hasLocation`）会在主页进入数据集之前执行。
-- 设置 `dedupeAcrossTargets: true` 后，Actor 会在写入前移除重复项。
+- Actor 会在写入前移除跨目标的重复项。设置 `dedupeAcrossTargets: false` 可保留这些重复项。
 - 被数据集拒绝的行不会计费。
 - 无输入、输入无效及零输出的运行，会向免费的 `diagnostics` 输出写入 1 条可供参考的记录。
 
@@ -245,7 +248,7 @@ Actor 可能会检查比写入数量更多的主页。你只需为通过所有�
 - 在 `twitterHandles` 中加入某个竞争对手的用户名，并设置 `relation: "followers"`。
 - 将 `https://x.com/<handle>/verified_followers` 粘贴到 Start URLs 中以获取已验证主页。
 - 将 List 的 URL 粘贴到 Start URLs 中以审查其成员。
-- 添加 2 个或以上用户名。设置 `dedupeMode: "first"` 只保留首个匹配的主页行，或使用 `dedupeMode: "merge"` 保留一行并附带所有匹配的来源目标。
+- 添加 2 个或以上用户名。共享主页只出现一次，归在第一个目标下。使用 `dedupeMode: "merge"` 可保留 1 行并附带所有匹配的目标。设置 `dedupeAcrossTargets: false` 可为每个目标保留 1 行。
 
 ### Console 与 API 输入体验
 
@@ -257,7 +260,7 @@ Console 提供以下控件：
 - 结果数量上限接受大于等于 1 的整数。
 - 数字类型的主页过滤条件接受大于等于 0 的整数。
 
-新的集成请使用规范字段名。兼容性别名在 JSON、API、SDK、自动化和任务输入中仍然可用，包括作为 Output Mode 别名的 `outputVariant` 和 `includeRaw`，以及作为 Dedupe Mode 别名的 `dedupeAcrossTargets`。可视化表单会隐藏与规范控件重复的别名。现有的 JSON 和已保存的任务输入会保持当前行为不变。
+新的集成请使用规范字段名。兼容性别名在 JSON、API、SDK、自动化和任务输入中仍然可用，包括作为 Output Mode 别名的 `outputVariant` 和 `includeRaw`，以及作为 Dedupe Mode 别名的 `dedupeAcrossTargets`。可视化表单会隐藏与规范控件重复的别名。现有 JSON 和已保存任务输入中的别名仍然有效。已保存的输入若设置了 `dedupeAcrossTargets: false` 或 `dedupeMode: "none"`，会为每个目标保留 1 行。
 
 ### 从其他关注者 Actor 迁移
 
@@ -341,7 +344,7 @@ Store 运行使用 Actor 的 `latest` 构建配置。API 客户端应省略构�
 
 - 设置 Apify 的最大总费用以限制运行成本。将 `maxItems` 留空可在该预算内获得最多的行数，或设置 `maxItems` 和 `maxItemsPerTarget` 以获得较少的主页数量。
 - 组合使用 `minFollowers`、`verifiedOnly`、`verifiedType`、`minStatuses`、`usernameContains`、`bioContains`、`locationContains`、`hasWebsite` 和 `hasLocation`，缩小计费数据集的范围。
-- 抓取多个竞争对手的用户名时，设置 `dedupeMode: "first"` 可在所有目标中只获取唯一主页。
+- 运行默认只保留跨目标的唯一主页。设置 `dedupeAcrossTargets: false` 可为每个目标保留 1 行。
 - 设置 `dedupeMode: "merge"` 可为每个主页获取一行，并附带所有匹配的来源目标。
 - 设置 `outputMode: "full"` 可在可用时获取可选的主页字段，例如置顶推文 ID、实体信息和主页元数据。
 - 设置 `outputMode: "raw"` 或 `includeRaw: true`，可在规范化字段之外附加一个经过脱敏处理的 `raw` 对象。
